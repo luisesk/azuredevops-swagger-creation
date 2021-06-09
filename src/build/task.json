@@ -13,36 +13,66 @@
         "Minor": 0,
         "Patch": 0
     },
-    "groups": [
-        {
-            "name": "inputGroup",
-            "displayName": "Source",
-            "isExpanded": true
-        },
-        {
-            "name": "outputGroup",
-            "displayName": "Output",
-            "isExpanded": true
-        }
-    ],
     "inputs": [
         {
-            "name": "InputVariableName1",
+            "name": "projectPath",
             "type": "string",
-            "label": "The label for our first input",
-            "defaultValue": "",
+            "label": "Project Path",
+            "defaultValue": "$(currentDirectory)",
             "required": true,
-            "helpMarkDown": "The help text for the first input field",
-            "groupName": "inputGroup"
+            "helpMarkDown": "Path with project file"
         },
         {
-            "name": "InputVariableName2",
-            "type": "string",
-            "label": "The label for our second input",
-            "defaultValue": "",
+            "name": "configuration",
+            "type": "pickList",
+            "label": "Configuration",
+            "options": {
+                "o1": "Debug",
+                "o2": "Release"
+            },
             "required": true,
-            "helpMarkDown": "The help text for the second input field",
-            "groupName": "output"
+            "helpMarkDown": "Configuration types for your project"
+        },
+        {
+            "name": "target",
+            "type": "pickList",
+            "label": "Target",
+            "options": {
+                "o1": "netcoreapp2.1",
+                "o2": "netcoreapp3.1"
+            },
+            "required": true,
+            "helpMarkDown": "netcore version"
+        },
+        {
+            "name": "version",
+            "type": "pickList",
+            "label": "Version",
+            "options": {
+                "o1": "v2",
+                "o2": "v3"
+            },
+            "required": true,
+            "helpMarkDown": "App Version"
+        },
+        {
+            "name": "format",
+            "type": "pickList",
+            "label": "Format",
+            "options": {
+                "o1": "json",
+                "o2": "yaml"
+            },
+            "required": true,
+            "helpMarkDown": "Output Format"
+        },
+        {
+            "name": "workingDirectory",
+            "type": "string",
+            "label": "Project Path",
+            "defaultValue": "$(currentDirectory)",
+            "required": true,
+            "helpMarkDown": "Working Directory"
         }
     ],
     "execution": {
