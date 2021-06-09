@@ -1,0 +1,57 @@
+{
+    "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
+    "id": "b9d2aa11-b890-4577-a11f-8efd6814b062",
+    "name": "CreateSwaggerFiles",
+    "friendlyName": "Create Swagger File" ,
+    "instanceNameFormat": "Create Swagger File",
+    "description": "Task to create a swagger file from an API that utilizes OpenAPI library",
+    "helpMarkDown": "",
+    "category": "Build",
+    "author": "Luís Paschoal",
+    "version": {
+        "Major": 1,
+        "Minor": 0,
+        "Patch": 0
+    },
+    "groups": [
+        {
+            "name": "inputGroup",
+            "displayName": "Source",
+            "isExpanded": true
+        },
+        {
+            "name": "outputGroup",
+            "displayName": "Output",
+            "isExpanded": true
+        }
+    ],
+    "inputs": [
+        {
+            "name": "InputVariableName1",
+            "type": "string",
+            "label": "The label for our first input",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "The help text for the first input field",
+            "groupName": "inputGroup"
+        },
+        {
+            "name": "InputVariableName2",
+            "type": "string",
+            "label": "The label for our second input",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "The help text for the second input field",
+            "groupName": "output"
+        }
+    ],
+    "execution": {
+        "PowerShell3": {
+            "target": "powershell.ps1",
+            "platforms": [
+                "windows"
+            ],
+            "workingDirectory": "$(currentDirectory)"
+        }
+    }
+}

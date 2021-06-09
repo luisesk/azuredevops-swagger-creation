@@ -1,0 +1,70 @@
+{
+    "manifestVersion": 1,
+    "id": "swagger-creator",
+    "publisher": "LuisAlbertoPaschoal",
+    "version": "1.0.0",
+    "name": "Swagger Creator",
+    "description": "An extension to create a swagger file from an API that uses OpenAPI library",
+    "public": false,
+    "categories": ["Azure Pipelines"],
+    "icons": {
+        "default": "images/icon.png"
+    },
+    
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],
+    "contributions": [
+        {
+            "id": "build-task",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "build"
+            }
+        },
+        {
+            "id": "release-task",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "release"
+            }
+        },
+        {
+            "id": "test-task",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "test"
+            }
+        }
+    ],
+    "files": [
+        {
+            "path": "node_modules/vss-web-extension-sdk/lib",
+            "addressable": true,
+            "packagePath": "lib"
+        },
+        {
+            "path": "src/build",
+            "packagePath": "build"
+        },
+        {
+            "path": "src/release",
+            "packagePath": "release"
+        },
+        {
+            "path": "src/test",
+            "packagePath": "test"
+        }
+    ]
+}
