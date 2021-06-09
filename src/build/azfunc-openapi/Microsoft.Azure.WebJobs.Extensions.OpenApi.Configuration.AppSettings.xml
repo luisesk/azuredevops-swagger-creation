@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Azure.WebJobs.Extensions.OpenApi.Configuration.AppSettings</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Configuration.AppSettings.AppSettingsBase">
+            <summary>
+            This represents the base app settings entity.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Configuration.AppSettings.AppSettingsBase.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Configuration.AppSettings.AppSettingsBase"/> class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Configuration.AppSettings.AppSettingsBase.Config">
+            <summary>
+            Gets the <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> instance.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Configuration.AppSettings.AppSettingsBase.GetBasePath">
+            <summary>
+            Gets the base path
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Configuration.AppSettings.Extensions.OperationSystem">
+            <summary>
+            This represents the entity to determine operating system.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Configuration.AppSettings.Extensions.OperationSystem.IsWindows">
+            <summary>
+            Gets the value indicating whether the OS is Windows or not.
+            </summary>
+            <returns><c>True</c>, if the OS is Windows; otherwise returns <c>False</c>.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Configuration.AppSettings.Extensions.OperationSystem.IsMacOs">
+            <summary>
+            Gets the value indicating whether the OS is Mac or not.
+            </summary>
+            <returns><c>True</c>, if the OS is Mac; otherwise returns <c>False</c>.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Configuration.AppSettings.Extensions.OperationSystem.IsLinux">
+            <summary>
+            Gets the value indicating whether the OS is Linux or not.
+            </summary>
+            <returns><c>True</c>, if the OS is Linux; otherwise returns <c>False</c>.</returns>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Configuration.AppSettings.Extensions.ConfigurationBinderExtensions">
+            <summary>
+            This represents the extension entity for <see cref="T:Microsoft.Extensions.Configuration.ConfigurationBinder"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Configuration.AppSettings.Extensions.ConfigurationBinderExtensions.Get``1(Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            Gets the instance from the configuration.
+            </summary>
+            <typeparam name="T">Type of instance.</typeparam>
+            <param name="configuration"><see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> instance.</param>
+            <param name="key">Configuration key.</param>
+            <returns>Returns the instance from the configuration.</returns>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Configuration.AppSettings.Resolvers.ConfigurationResolver">
+            <summary>
+            This represents the resolver entity for configuration.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Configuration.AppSettings.Resolvers.ConfigurationResolver.Resolve">
+            <summary>
+            Gets the <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> instance from the environment variables - either local.settings.json or App Settings blade.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Configuration.AppSettings.Resolvers.ConfigurationResolver.GetValue``1(System.String,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Gets the configuration value.
+            </summary>
+            <typeparam name="T">Type of return value.</typeparam>
+            <param name="key">Key for lookup.</param>
+            <param name="config"><see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> instance from the environment variables - either local.settings.json or App Settings blade.</param>
+            <returns>Returns the value.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Configuration.AppSettings.Resolvers.ConfigurationResolver.GetBasePath(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Gets the base path of the executing Azure Functions assembly.
+            </summary>
+            <param name="environmentVariables"><see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> instance representing environment variables from either local.settings.json or App Settings blade.</param>
+            <returns>Returns the base path of the executing Azure Functions assembly.</returns>
+        </member>
+    </members>
+</doc>

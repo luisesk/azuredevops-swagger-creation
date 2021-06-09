@@ -1,0 +1,2630 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Azure.WebJobs.Extensions.OpenApi.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IDocument">
+            <summary>
+            This provides interfaces to the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Document"/> class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IDocument.OpenApiDocument">
+            <summary>
+            Gets the underlying <see cref="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IDocument.OpenApiDocument"/> instance.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IDocument.InitialiseDocument">
+            <summary>
+            Initializes the document instance.
+            </summary>
+            <returns><see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IDocument"/> instance.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IDocument.AddMetadata(Microsoft.OpenApi.Models.OpenApiInfo)">
+            <summary>
+            Adds metadata to build OpenAPI document.
+            </summary>
+            <param name="info"><see cref="T:Microsoft.OpenApi.Models.OpenApiInfo"/> instance.</param>
+            <returns><see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IDocument"/> instance.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IDocument.AddServer(Microsoft.AspNetCore.Http.HttpRequest,System.String,Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IOpenApiConfigurationOptions)">
+            <summary>
+            Adds server details.
+            </summary>
+            <param name="req"><see cref="T:Microsoft.AspNetCore.Http.HttpRequest"/> instance.</param>
+            <param name="routePrefix">Route prefix value.</param>
+            <param name="options"><see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IOpenApiConfigurationOptions"/> instance.</param>
+            <returns><see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IDocument"/> instance.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IDocument.AddNamingStrategy(Newtonsoft.Json.Serialization.NamingStrategy)">
+            <summary>
+            Adds the naming strategy.
+            </summary>
+            <param name="strategy"><see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> instance to create the JSON schema from .NET Types.</param>
+            <returns><see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IDocument"/> instance.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IDocument.AddVisitors(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <summary>
+            Adds the visitor collection.
+            </summary>
+            <param name="collection"><see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection"/> instance.</param>
+            <returns><see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IDocument"/> instance.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IDocument.Build(System.String)">
+            <summary>
+            Builds OpenAPI document.
+            </summary>
+            <param name="assemblyPath">Assembly file path.</param>
+            <returns><see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IDocument"/> instance.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IDocument.Build(System.Reflection.Assembly)">
+            <summary>
+            Builds OpenAPI document.
+            </summary>
+            <param name="assembly"><see cref="T:System.Reflection.Assembly"/> instance.</param>
+            <returns><see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IDocument"/> instance.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IDocument.RenderAsync(Microsoft.OpenApi.OpenApiSpecVersion,Microsoft.OpenApi.OpenApiFormat)">
+            <summary>
+            Renders OpenAPI document.
+            </summary>
+            <param name="version"><see cref="T:Microsoft.OpenApi.OpenApiSpecVersion"/> value.</param>
+            <param name="format"><see cref="T:Microsoft.OpenApi.OpenApiFormat"/> value.</param>
+            <returns>Serialised OpenAPI document.</returns>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IDocumentHelper">
+            <summary>
+            This provides interfaces to the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.DocumentHelper"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IDocumentHelper.GetHttpTriggerMethods(System.Reflection.Assembly)">
+            <summary>
+            Gets the list of HTTP triggers.
+            </summary>
+            <param name="assembly">Assembly of Azure Function instance.</param>
+            <returns>List of <see cref="T:System.Reflection.MethodInfo"/> instances representing HTTP triggers.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IDocumentHelper.GetFunctionNameAttribute(System.Reflection.MethodInfo)">
+            <summary>
+            Gets the <see cref="T:Microsoft.Azure.WebJobs.FunctionNameAttribute"/> from the method.
+            </summary>
+            <param name="element"><see cref="T:System.Reflection.MethodInfo"/> instance.</param>
+            <returns><see cref="T:Microsoft.Azure.WebJobs.FunctionNameAttribute"/> instance.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IDocumentHelper.GetHttpTriggerAttribute(System.Reflection.MethodInfo)">
+            <summary>
+            Gets the <see cref="T:Microsoft.Azure.WebJobs.HttpTriggerAttribute"/> from the parameters of the method.
+            </summary>
+            <param name="element"><see cref="T:System.Reflection.MethodInfo"/> instance.</param>
+            <returns><see cref="T:Microsoft.Azure.WebJobs.HttpTriggerAttribute"/> instance.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IDocumentHelper.GetHttpEndpoint(Microsoft.Azure.WebJobs.FunctionNameAttribute,Microsoft.Azure.WebJobs.HttpTriggerAttribute)">
+            <summary>
+            Gets the HTTP trigger endpoint.
+            </summary>
+            <param name="function"><see cref="T:Microsoft.Azure.WebJobs.FunctionNameAttribute"/> instance.</param>
+            <param name="trigger"><see cref="T:Microsoft.Azure.WebJobs.HttpTriggerAttribute"/> instance.</param>
+            <returns>Function HTTP endpoint.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IDocumentHelper.GetHttpVerb(Microsoft.Azure.WebJobs.HttpTriggerAttribute)">
+            <summary>
+            Gets the HTTP verb.
+            </summary>
+            <param name="trigger"><see cref="T:Microsoft.Azure.WebJobs.HttpTriggerAttribute"/> instance.</param>
+            <returns><see cref="T:Microsoft.OpenApi.Models.OperationType"/> value.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IDocumentHelper.GetOpenApiPath(System.String,Microsoft.OpenApi.Models.OpenApiPaths)">
+            <summary>
+            Gets the <see cref="T:Microsoft.OpenApi.Models.OpenApiPathItem"/> instance.
+            </summary>
+            <param name="path">HTTP endpoint as a path.</param>
+            <param name="paths"><see cref="T:Microsoft.OpenApi.Models.OpenApiPaths"/> instance.</param>
+            <returns><see cref="T:Microsoft.OpenApi.Models.OpenApiPathItem"/> instance.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IDocumentHelper.GetOpenApiOperation(System.Reflection.MethodInfo,Microsoft.Azure.WebJobs.FunctionNameAttribute,Microsoft.OpenApi.Models.OperationType)">
+            <summary>
+            Gets the <see cref="T:Microsoft.OpenApi.Models.OpenApiOperation"/> instance.
+            </summary>
+            <param name="element"><see cref="T:System.Reflection.MethodInfo"/> instance.</param>
+            <param name="function"><see cref="T:Microsoft.Azure.WebJobs.FunctionNameAttribute"/> instance.</param>
+            <param name="verb"><see cref="T:Microsoft.OpenApi.Models.OperationType"/> value.</param>
+            <returns><see cref="T:Microsoft.OpenApi.Models.OpenApiOperation"/> instance.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IDocumentHelper.GetOpenApiSecurityRequirement(System.Reflection.MethodInfo,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <summary>
+            Gets the collection of <see cref="T:Microsoft.OpenApi.Models.OpenApiSecurityRequirement"/> instances.
+            </summary>
+            <param name="element"><see cref="T:System.Reflection.MethodInfo"/> instance.</param>
+            <param name="namingStrategy"><see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> instance to create the JSON schema from .NET Types.</param>
+            <returns>Collection of <see cref="T:Microsoft.OpenApi.Models.OpenApiSecurityRequirement"/> instance.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IDocumentHelper.GetOpenApiParameters(System.Reflection.MethodInfo,Microsoft.Azure.WebJobs.HttpTriggerAttribute,Newtonsoft.Json.Serialization.NamingStrategy,Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <summary>
+            Gets the list of <see cref="T:Microsoft.OpenApi.Models.OpenApiParameter"/> instances.
+            </summary>
+            <param name="element"><see cref="T:System.Reflection.MethodInfo"/> instance.</param>
+            <param name="trigger"><see cref="T:Microsoft.Azure.WebJobs.HttpTriggerAttribute"/> instance.</param>
+            <param name="namingStrategy"><see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> instance to create the JSON schema from .NET Types.</param>
+            <param name="collection"><see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection"/> instance to process parameters.</param>
+            <returns>List of <see cref="T:Microsoft.OpenApi.Models.OpenApiParameter"/> instance.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IDocumentHelper.GetOpenApiRequestBody(System.Reflection.MethodInfo,Newtonsoft.Json.Serialization.NamingStrategy,Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <summary>
+            Gets the <see cref="T:Microsoft.OpenApi.Models.OpenApiRequestBody"/> instance.
+            </summary>
+            <param name="element"><see cref="T:System.Reflection.MethodInfo"/> instance.</param>
+            <param name="namingStrategy"><see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> instance to create the JSON schema from .NET Types.</param>
+            <param name="collection"><see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection"/> instance to process parameters.</param>
+            <returns><see cref="T:Microsoft.OpenApi.Models.OpenApiRequestBody"/> instance.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IDocumentHelper.GetOpenApiResponseBody(System.Reflection.MethodInfo,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <summary>
+            Gets the <see cref="T:Microsoft.OpenApi.Models.OpenApiResponses"/> instance.
+            </summary>
+            <param name="element"><see cref="T:System.Reflection.MethodInfo"/> instance.</param>
+            <param name="namingStrategy"><see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> instance to create the JSON schema from .NET Types.</param>
+            <returns><see cref="T:Microsoft.OpenApi.Models.OpenApiResponses"/> instance.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IDocumentHelper.GetOpenApiResponses(System.Reflection.MethodInfo,Newtonsoft.Json.Serialization.NamingStrategy,Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <summary>
+            Gets the <see cref="T:Microsoft.OpenApi.Models.OpenApiResponses"/> instance.
+            </summary>
+            <param name="element"><see cref="T:System.Reflection.MethodInfo"/> instance.</param>
+            <param name="namingStrategy"><see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> instance to create the JSON schema from .NET Types.</param>
+            <param name="collection"><see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection"/> instance to process parameters.</param>
+            <returns><see cref="T:Microsoft.OpenApi.Models.OpenApiResponses"/> instance.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IDocumentHelper.GetOpenApiSchemas(System.Collections.Generic.List{System.Reflection.MethodInfo},Newtonsoft.Json.Serialization.NamingStrategy,Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <summary>
+            Gets the collection of <see cref="T:Microsoft.OpenApi.Models.OpenApiSchema"/> instances.
+            </summary>
+            <param name="elements">List of <see cref="T:System.Reflection.MethodInfo"/> instance.</param>
+            <param name="namingStrategy"><see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> instance to create the JSON schema from .NET Types.</param>
+            <param name="collection"><see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection"/> instance to add types to schema.</param>
+            <returns>Collection of <see cref="T:Microsoft.OpenApi.Models.OpenApiSchema"/> instance.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IDocumentHelper.GetOpenApiSecuritySchemes">
+            <summary>
+            Gets the collection of <see cref="T:Microsoft.OpenApi.Models.OpenApiSecurityScheme"/> instances.
+            </summary>
+            <returns>Collection of <see cref="T:Microsoft.OpenApi.Models.OpenApiSecurityScheme"/> instance.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IDocumentHelper.GetOpenApiSecuritySchemes(System.Collections.Generic.List{System.Reflection.MethodInfo},Newtonsoft.Json.Serialization.NamingStrategy)">
+            <summary>
+            Gets the collection of <see cref="T:Microsoft.OpenApi.Models.OpenApiSecurityScheme"/> instances.
+            </summary>
+            <param name="elements">List of <see cref="T:System.Reflection.MethodInfo"/> instance.</param>
+            <param name="namingStrategy"><see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> instance to create the JSON schema from .NET Types.</param>
+            <returns>Collection of <see cref="T:Microsoft.OpenApi.Models.OpenApiSecurityScheme"/> instance.</returns>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IOpenApiConfigurationOptions">
+            <summary>
+            This provides interfaces classes implementing for OpenAPI metadata..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IOpenApiConfigurationOptions.Info">
+            <summary>
+            Gets or sets the <see cref="T:Microsoft.OpenApi.Models.OpenApiInfo"/> instance.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IOpenApiConfigurationOptions.Servers">
+            <summary>
+            Gets or sets the list of <see cref="T:Microsoft.OpenApi.Models.OpenApiServer"/> instances.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IOpenApiConfigurationOptions.OpenApiVersion">
+            <summary>
+            Gets or sets the OpenAPI spec version.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IOpenApiCustomResponseHeader">
+            <summary>
+            This provides interfaces to classes implementing OpenAPI response object.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IOpenApiCustomResponseHeader.Headers">
+            <summary>
+            Gets or sets the collection of the <see cref="T:Microsoft.OpenApi.Models.OpenApiHeader"/> instances.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IOpenApiCustomUIOptions">
+            <summary>
+            This provides interfaces classes implementing for the custom UI.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IOpenApiCustomUIOptions.CustomStylesheetPath">
+            <summary>
+            Gets the filepath for stylesheet for custom UI.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IOpenApiCustomUIOptions.CustomJavaScriptPath">
+            <summary>
+            Gets filepath for JavaScript for custom UI.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IOpenApiCustomUIOptions.GetStylesheetAsync">
+            <summary>
+            Gets the stylesheet to be rendered on the page.
+            </summary>
+            <returns>The stylesheet string for custom UI.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IOpenApiCustomUIOptions.GetJavaScriptAsync">
+            <summary>
+            Gets the javascript to be rendered on the page.
+            </summary>
+            <returns>The JavaScript string for custom UI.</returns>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.ISwaggerUI">
+            <summary>
+            This provides interfaces to the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.SwaggerUI"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.ISwaggerUI.AddMetadata(Microsoft.OpenApi.Models.OpenApiInfo)">
+            <summary>
+            Adds metadata to build OpenAPI document.
+            </summary>
+            <param name="info"><see cref="T:Microsoft.OpenApi.Models.OpenApiInfo"/> instance.</param>
+            <returns><see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.ISwaggerUI"/> instance.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.ISwaggerUI.AddServer(Microsoft.AspNetCore.Http.HttpRequest,System.String,Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IOpenApiConfigurationOptions)">
+            <summary>
+            Adds server details.
+            </summary>
+            <param name="req"><see cref="T:Microsoft.AspNetCore.Http.HttpRequest"/> instance.</param>
+            <param name="routePrefix">Route prefix value.</param>
+            <param name="options"><see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IOpenApiConfigurationOptions"/> instance.</param>
+            <returns><see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.ISwaggerUI"/> instance.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.ISwaggerUI.BuildAsync(System.Reflection.Assembly,Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IOpenApiCustomUIOptions)">
+            <summary>
+            Builds Swagger UI document.
+            </summary>
+            <param name="assembly"><see cref="T:System.Reflection.Assembly"/> instance.</param>
+            <param name="options"><see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IOpenApiCustomUIOptions"/> instance.</param>
+            <returns><see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.ISwaggerUI"/> instance.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.ISwaggerUI.BuildOAuth2RedirectAsync(System.Reflection.Assembly)">
+            <summary>
+            Builds OAuth2 Redirect document.
+            </summary>
+            <param name="assembly"><see cref="T:System.Reflection.Assembly"/> instance.</param>
+            <returns><see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.ISwaggerUI"/> instance.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.ISwaggerUI.RenderAsync(System.String,Microsoft.Azure.WebJobs.Extensions.Http.AuthorizationLevel,System.String)">
+            <summary>
+            Renders OpenAPI UI in HTML.
+            </summary>
+            <param name="endpoint">The endpoint of the Swagger document.</param>
+            <param name="authLevel">The authorisation level of the Swagger document.</param>
+            <param name="authKey">API key of the HTTP endpoint to render OpenAPI document.</param>
+            <returns>OpenAPI UI in HTML.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.ISwaggerUI.RenderOAuth2RedirectAsync(System.String,Microsoft.Azure.WebJobs.Extensions.Http.AuthorizationLevel,System.String)">
+            <summary>
+            Renders OAuth Redirect in HTML.
+            </summary>
+            <param name="endpoint">The endpoint of the OAuth2 Redirect page.</param>
+            <param name="authLevel">The authorisation level of the Swagger document.</param>
+            <param name="authKey">API key of the HTTP endpoint to render OpenAPI document.</param>
+            <returns>OAuth Redirect in HTML.</returns>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IAcceptor">
+            <summary>
+            This provides interfaces to the acceptor classes.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IAcceptor.Accept(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <summary>
+            Accepts the visitors.
+            </summary>
+            <param name="collection"><see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection"/> instance.</param>
+            <param name="namingStrategy"><see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> instance.</param>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IVisitor">
+            <summary>
+            This provides interfaces to visitor classes.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IVisitor.IsVisitable(System.Type)">
+            <summary>
+            Checks whether the type is visitable or not.
+            </summary>
+            <param name="type">Type to check.</param>
+            <returns>Returns <c>True</c>, if the type is visitable; otherwise returns <c>False</c>.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IVisitor.Visit(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IAcceptor,System.Collections.Generic.KeyValuePair{System.String,System.Type},Newtonsoft.Json.Serialization.NamingStrategy,System.Attribute[])">
+            <summary>
+            Visits and process the acceptor.
+            </summary>
+            <param name="acceptor"><see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IAcceptor"/> instance.</param>
+            <param name="type">Type to check.</param>
+            <param name="namingStrategy"><see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> instance.</param>
+            <param name="attributes">List of attribute instances.</param>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IVisitor.IsNavigatable(System.Type)">
+            <summary>
+            Checks whether the type is navigatable to its sub-type or not.
+            </summary>
+            <param name="type">Type to check.</param>
+            <returns>Returns <c>True</c>, if the type is navigatable; otherwise returns <c>False</c>.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IVisitor.IsParameterVisitable(System.Type)">
+            <summary>
+            Checks whether the type is visitable or not for parameters.
+            </summary>
+            <param name="type">Type to check.</param>
+            <returns>Returns <c>True</c>, if the type is visitable for parameters; otherwise returns <c>False</c>.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IVisitor.ParameterVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <summary>
+            Visits and process the type for parameters.
+            </summary>
+            <param name="type">Type to check.</param>
+            <param name="namingStrategy"><see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> instance.</param>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IVisitor.IsPayloadVisitable(System.Type)">
+            <summary>
+            Checks whether the type is visitable or not for payloads.
+            </summary>
+            <param name="type">Type to check.</param>
+            <returns>Returns <c>True</c>, if the type is visitable for payloads; otherwise returns <c>False</c>.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IVisitor.PayloadVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <summary>
+            Visits and process the type for payloads.
+            </summary>
+            <param name="type">Type to check.</param>
+            <param name="namingStrategy"><see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> instance.</param>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.DisplayAttribute">
+            <summary>
+            This represents the attribute entity for enums.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.DisplayAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.DisplayAttribute"/> class.
+            </summary>
+            <param name="name">The display name.</param>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.DisplayAttribute.Name">
+            <summary>
+            Gets the display name.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiIgnoreAttribute">
+            <summary>
+            This represents the attribute entity for HTTP triggers to be excluded for rendering.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiOperationAttribute">
+            <summary>
+            This represents the attribute entity for HTTP triggers to define OpenAPI operation.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiOperationAttribute.#ctor(System.String,System.String[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiOperationAttribute"/> class.
+            </summary>
+            <param name="operationId">Operation ID.</param>
+            <param name="tags">List of tags.</param>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiOperationAttribute.OperationId">
+            <summary>
+            Gets the operation ID.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiOperationAttribute.Tags">
+            <summary>
+            Gets the list of tags.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiOperationAttribute.Summary">
+            <summary>
+            Gets or sets the summary.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiOperationAttribute.Description">
+            <summary>
+            Gets or sets the description.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiOperationAttribute.Visibility">
+            <summary>
+            Gets or sets the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiVisibilityType"/> value. Default is <see cref="F:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiVisibilityType.Undefined"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiOperationAttribute.Deprecated">
+            <summary>
+            Gets or sets the value indicating whether the operation is deprecated or not.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiParameterAttribute">
+            <summary>
+            This represents the attribute entity for HTTP triggers to define OpenAPI parameter.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiParameterAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiParameterAttribute"/> class.
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiParameterAttribute.Name">
+            <summary>
+            Gets the parameter name.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiParameterAttribute.Summary">
+            <summary>
+            Gets or sets the summary.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiParameterAttribute.Description">
+            <summary>
+            Gets or sets the parameter description.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiParameterAttribute.Type">
+            <summary>
+            Gets or sets the parameter type. Default is <c>string</c>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiParameterAttribute.In">
+            <summary>
+            Gets or sets the parameter location. Default is <see cref="F:Microsoft.OpenApi.Models.ParameterLocation.Path"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiParameterAttribute.CollectionDelimiter">
+            <summary>
+            Gets or sets the parameter collection delimiter. Default is <see cref="F:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiParameterCollectionDelimiterType.Comma"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiParameterAttribute.Explode">
+            <summary>
+            Gets or sets the value indicating whether the same query string parameter can be used multiple times or not.
+            This value is only valid when the <see cref="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiParameterAttribute.In"/> parameter value is <see cref="F:Microsoft.OpenApi.Models.ParameterLocation.Query"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiParameterAttribute.Required">
+            <summary>
+            Gets or sets the value indicating whether the parameter is required or not. Default is <c>false</c>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiParameterAttribute.Visibility">
+            <summary>
+            Gets or sets the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiVisibilityType"/> value. Default is <see cref="F:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiVisibilityType.Undefined"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiParameterAttribute.Deprecated">
+            <summary>
+            Gets or sets the value indicating whether the parameter is deprecated or not.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiPayloadAttribute">
+            <summary>
+            This represents the attribute entity for HTTP triggers to define payload. This MUST be inherited.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiPayloadAttribute.#ctor(System.String,System.Type)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiPayloadAttribute"/> class.
+            </summary>
+            <param name="contentType">Content type.</param>
+            <param name="bodyType">Type of payload.</param>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiPayloadAttribute.ContentType">
+            <summary>
+            Gets the content type.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiPayloadAttribute.BodyType">
+            <summary>
+            Gets the payload body type.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiPayloadAttribute.Description">
+            <summary>
+            Gets or sets the description.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiPropertyDescriptionAttribute">
+            <summary>
+            This represents the attribute entity for OpenAPI model property description.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiPropertyDescriptionAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiPropertyDescriptionAttribute"/> class.
+            </summary>
+            <param name="description">Property description value.</param>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiPropertyDescriptionAttribute.Description">
+            <summary>
+            Gets the description.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiRequestBodyAttribute">
+            <summary>
+            This represents the attribute entity for HTTP triggers to define request body payload.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiRequestBodyAttribute.#ctor(System.String,System.Type)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiRequestBodyAttribute"/> class.
+            </summary>
+            <param name="contentType">Content type.</param>
+            <param name="bodyType">Type of payload.</param>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiRequestBodyAttribute.Required">
+            <summary>
+            Gets or sets the value indicating whether the request body is required or not.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiRequestBodyAttribute.Deprecated">
+            <summary>
+            Gets or sets the value indicating whether the request payload is deprecated or not.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiResponseBodyAttribute">
+            <summary>
+            This represents the attribute entity for HTTP triggers to define response body payload.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiResponseBodyAttribute.#ctor(System.Net.HttpStatusCode,System.String,System.Type)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiResponseBodyAttribute"/> class.
+            </summary>
+            <param name="statusCode">HTTP status code.</param>
+            <param name="contentType">Content type.</param>
+            <param name="bodyType">Type of payload.</param>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiResponseBodyAttribute.StatusCode">
+            <summary>
+            Gets the HTTP status code value.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiResponseBodyAttribute.Summary">
+            <summary>
+            Gets or sets the summary.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiResponseWithBodyAttribute">
+            <summary>
+            This represents the attribute entity for HTTP triggers to define response body payload.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiResponseWithBodyAttribute.#ctor(System.Net.HttpStatusCode,System.String,System.Type)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiResponseWithBodyAttribute"/> class.
+            </summary>
+            <param name="statusCode">HTTP status code.</param>
+            <param name="contentType">Content type.</param>
+            <param name="bodyType">Type of payload.</param>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiResponseWithBodyAttribute.StatusCode">
+            <summary>
+            Gets the HTTP status code value.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiResponseWithBodyAttribute.CustomHeaderType">
+            <summary>
+            Gets or sets the type containing the collection of the additional response headers.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiResponseWithBodyAttribute.Summary">
+            <summary>
+            Gets or sets the summary.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiResponseWithBodyAttribute.Deprecated">
+            <summary>
+            Gets or sets the value indicating whether the response payload is deprecated or not.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiResponseWithoutBodyAttribute">
+            <summary>
+            This represents the attribute entity for HTTP triggers to define response body payload.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiResponseWithoutBodyAttribute.#ctor(System.Net.HttpStatusCode)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiResponseWithoutBodyAttribute"/> class.
+            </summary>
+            <param name="statusCode">HTTP status code.</param>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiResponseWithoutBodyAttribute.StatusCode">
+            <summary>
+            Gets the HTTP status code value.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiResponseWithoutBodyAttribute.CustomHeaderType">
+            <summary>
+            Gets or sets the type containing the collection of the additional response headers.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiResponseWithoutBodyAttribute.Summary">
+            <summary>
+            Gets or sets the summary.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiResponseWithoutBodyAttribute.Description">
+            <summary>
+            Gets or sets the description.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiSchemaVisibilityAttribute">
+            <summary>
+            This represents the attribute entity for OpenAPI schema visibility.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiSchemaVisibilityAttribute.#ctor(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiVisibilityType)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiSchemaVisibilityAttribute"/> class.
+            </summary>
+            <param name="visibility"><see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiVisibilityType"/> value.</param>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiSchemaVisibilityAttribute.Visibility">
+            <summary>
+            Gets the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiVisibilityType"/> value.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiSecurityAttribute">
+            <summary>
+            This represents the attribute entity for HTTP triggers to define OpenAPI operation.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiSecurityAttribute.#ctor(System.String,Microsoft.OpenApi.Models.SecuritySchemeType)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiSecurityAttribute"/> class.
+            </summary>
+            <param name="schemeName">OpenAPI security scheme name.</param>
+            <param name="schemeType">OpenAPI security scheme type.</param>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiSecurityAttribute.SchemeName">
+            <summary>
+            Gets the OpenAPI security scheme name.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiSecurityAttribute.SchemeType">
+            <summary>
+            Gets the OpenAPI security scheme type.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiSecurityAttribute.Description">
+            <summary>
+            Gets or sets the OpenAPI security scheme description.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiSecurityAttribute.Name">
+            <summary>
+            Gets or sets the name of the header, query or cookie. This MUST be provided when the <see cref="T:Microsoft.OpenApi.Models.SecuritySchemeType"/> value is <see cref="F:Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiSecurityAttribute.In">
+            <summary>
+            Gets or sets the location of the API key. This MUST be provided when the <see cref="T:Microsoft.OpenApi.Models.SecuritySchemeType"/> value is <see cref="F:Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiSecurityAttribute.Scheme">
+            <summary>
+            Gets or sets the name of the authorisation scheme. This MUST be provided when the <see cref="T:Microsoft.OpenApi.Models.SecuritySchemeType"/> value is <see cref="F:Microsoft.OpenApi.Models.SecuritySchemeType.Http"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiSecurityAttribute.BearerFormat">
+            <summary>
+            Gets or sets the hint to the client to identify how the bearer token is formatted. This MUST be provided when the <see cref="T:Microsoft.OpenApi.Models.SecuritySchemeType"/> value is <see cref="F:Microsoft.OpenApi.Models.SecuritySchemeType.Http"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiSecurityAttribute.Flows">
+            <summary>
+            Gets or sets the configuration information for the flow types supported. This MUST be the type inheriting <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.OpenApiOAuthSecurityFlows"/>. This MUST be provided when the <see cref="T:Microsoft.OpenApi.Models.SecuritySchemeType"/> value is <see cref="F:Microsoft.OpenApi.Models.SecuritySchemeType.OAuth2"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiSecurityAttribute.OpenIdConnectUrl">
+            <summary>
+            Gets or sets the OpenId Connect URL to discover OAuth2 configuration values. This MUST be provided when the <see cref="T:Microsoft.OpenApi.Models.SecuritySchemeType"/> value is <see cref="F:Microsoft.OpenApi.Models.SecuritySchemeType.OpenIdConnect"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiSecurityAttribute.OpenIdConnectScopes">
+            <summary>
+            Gets or sets the comma delimited list of scopes of OpenId Connect. This MUST be provided when the <see cref="T:Microsoft.OpenApi.Models.SecuritySchemeType"/> value is <see cref="F:Microsoft.OpenApi.Models.SecuritySchemeType.OpenIdConnect"/>.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Comparers.OpenApiSecurityRequirementComparer">
+            <summary>
+            This represents the comparer entity for <see cref="T:Microsoft.OpenApi.Models.OpenApiSecurityRequirement"/> class.
+            /// </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Comparers.OpenApiSecurityRequirementComparer.Equals(Microsoft.OpenApi.Models.OpenApiSecurityRequirement,Microsoft.OpenApi.Models.OpenApiSecurityRequirement)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Comparers.OpenApiSecurityRequirementComparer.GetHashCode(Microsoft.OpenApi.Models.OpenApiSecurityRequirement)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.DefaultOpenApiConfigurationOptions">
+            <summary>
+            This represents the options entity for OpenAPI metadata configuration.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.DefaultOpenApiConfigurationOptions.Info">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.DefaultOpenApiConfigurationOptions.Servers">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.DefaultOpenApiConfigurationOptions.OpenApiVersion">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.DefaultOpenApiCustomUIOptions">
+            <summary>
+            This represents the options entity for custom UI configuration.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.DefaultOpenApiCustomUIOptions.#ctor(System.Reflection.Assembly)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.DefaultOpenApiCustomUIOptions"/> class.
+            </summary>
+            <param name="assembly"><see cref="T:System.Reflection.Assembly"/> instance.</param>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.DefaultOpenApiCustomUIOptions.CustomStylesheetPath">
+            <inheritdoc/>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.DefaultOpenApiCustomUIOptions.CustomJavaScriptPath">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.DefaultOpenApiCustomUIOptions.GetStylesheetAsync">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.DefaultOpenApiCustomUIOptions.GetJavaScriptAsync">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.ExtensionsSettings">
+            <summary>
+            This represents the settings entity for extensions in "host.json".
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.ExtensionsSettings.Http">
+            <summary>
+            Gets or sets the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.HttpSettings"/> instance.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.HostJsonSettings">
+            <summary>
+            This represents the settings entity for "host.json".
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.HostJsonSettings.Version">
+            <summary>
+            Gets or sets the version.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.HostJsonSettings.Http">
+            <summary>
+            Gets or sets the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.HttpSettings"/> instance.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.HostJsonSettings.Extensions">
+            <summary>
+            Gets or sets the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.ExtensionsSettings"/> instance.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.HttpSettings">
+            <summary>
+            This represents the settings entity for HTTP in "host.json".
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.HttpSettings.RoutePrefix">
+            <summary>
+            Gets or sets the route prefix. Default value is "api".
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.OpenApiAppSettingsBase">
+            <summary>
+            This represents the base settings entity from the configurations for OpenAPI.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.OpenApiAppSettingsBase.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.OpenApiAppSettingsBase"/> class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.OpenApiAppSettingsBase.OpenApiInfo">
+            <summary>
+            Gets the <see cref="T:Microsoft.OpenApi.Models.OpenApiInfo"/> instance.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.OpenApiAppSettingsBase.SwaggerAuthKey">
+            <summary>
+            Gets the Function API key for OpenAPI document.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.OpenApiAppSettingsBase.HttpSettings">
+            <summary>
+            Gets the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.HttpSettings"/> instance.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.OpenApiOAuthSecurityFlows">
+            <summary>
+            This represents the auth flow entity for OAuth2. This MUST be inherited.
+            /// </summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.OpenApiSettings">
+            <summary>
+            This represents the settings entity for OpenAPI metadata.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.OpenApiSettings.Info">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.OpenApiSettings.Servers">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.OpenApiSettings.OpenApiVersion">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.RouteConstraintFilter">
+            <summary>
+            This represents the entity for route constraint filter.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.RouteConstraintFilter.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.RouteConstraintFilter"/> class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.RouteConstraintFilter.Pattern">
+            <summary>
+            Gets the pattern.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.RouteConstraintFilter.Replacement">
+            <summary>
+            Gets the replacement.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.RouteConstraintFilter.Filter">
+            <summary>
+            Gets the <see cref="T:System.Text.RegularExpressions.Regex"/> instance as filter.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Document">
+            <summary>
+            This represents the document entity handling OpenAPI document.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Document.#ctor(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IDocumentHelper)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Document"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Document.#ctor(Microsoft.OpenApi.Models.OpenApiDocument)">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Document.OpenApiDocument">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Document.InitialiseDocument">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Document.AddMetadata(Microsoft.OpenApi.Models.OpenApiInfo)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Document.AddServer(Microsoft.AspNetCore.Http.HttpRequest,System.String,Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IOpenApiConfigurationOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Document.AddNamingStrategy(Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Document.AddVisitors(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Document.Build(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Document.Build(System.Reflection.Assembly)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Document.RenderAsync(Microsoft.OpenApi.OpenApiSpecVersion,Microsoft.OpenApi.OpenApiFormat)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.DocumentHelper">
+            <summary>
+            This represents the helper entity for the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Document"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.DocumentHelper.#ctor(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.RouteConstraintFilter,Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.IOpenApiSchemaAcceptor)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.DocumentHelper"/> class.
+            </summary>
+            <param name="filter"><see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.RouteConstraintFilter"/> instance.</param>
+            <param name="acceptor"><see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IAcceptor"/> instance.</param>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.DocumentHelper.GetHttpTriggerMethods(System.Reflection.Assembly)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.DocumentHelper.GetHttpTriggerAttribute(System.Reflection.MethodInfo)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.DocumentHelper.GetFunctionNameAttribute(System.Reflection.MethodInfo)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.DocumentHelper.GetHttpEndpoint(Microsoft.Azure.WebJobs.FunctionNameAttribute,Microsoft.Azure.WebJobs.HttpTriggerAttribute)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.DocumentHelper.GetHttpVerb(Microsoft.Azure.WebJobs.HttpTriggerAttribute)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.DocumentHelper.GetOpenApiPath(System.String,Microsoft.OpenApi.Models.OpenApiPaths)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.DocumentHelper.GetOpenApiOperation(System.Reflection.MethodInfo,Microsoft.Azure.WebJobs.FunctionNameAttribute,Microsoft.OpenApi.Models.OperationType)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.DocumentHelper.GetOpenApiSecurityRequirement(System.Reflection.MethodInfo,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.DocumentHelper.GetOpenApiParameters(System.Reflection.MethodInfo,Microsoft.Azure.WebJobs.HttpTriggerAttribute,Newtonsoft.Json.Serialization.NamingStrategy,Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.DocumentHelper.GetOpenApiRequestBody(System.Reflection.MethodInfo,Newtonsoft.Json.Serialization.NamingStrategy,Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.DocumentHelper.GetOpenApiResponseBody(System.Reflection.MethodInfo,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.DocumentHelper.GetOpenApiResponses(System.Reflection.MethodInfo,Newtonsoft.Json.Serialization.NamingStrategy,Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.DocumentHelper.GetOpenApiSchemas(System.Collections.Generic.List{System.Reflection.MethodInfo},Newtonsoft.Json.Serialization.NamingStrategy,Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.DocumentHelper.GetOpenApiSecuritySchemes">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.DocumentHelper.GetOpenApiSecuritySchemes(System.Collections.Generic.List{System.Reflection.MethodInfo},Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiFormatType">
+            <summary>
+            This specifies the OpenAPI format.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiFormatType.Json">
+            <summary>
+            Identifies the JSON format.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiFormatType.Yaml">
+            <summary>
+            Identifies the YAML format.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiParameterCollectionDelimiterType">
+            <summary>
+            This specifies the parameter collection delimiter.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiParameterCollectionDelimiterType.Comma">
+            <summary>
+            Identifies "comma".
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiParameterCollectionDelimiterType.Space">
+            <summary>
+            Identifies "space".
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiParameterCollectionDelimiterType.Pipe">
+            <summary>
+            Identifies "pipe".
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiSecurityLocationType">
+            <summary>
+            This specifies the OpenAPI security key location.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiSecurityLocationType.None">
+            <summary>
+            Identifies no location.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiSecurityLocationType.Query">
+            <summary>
+            Identifies the query as the API key location.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiSecurityLocationType.Header">
+            <summary>
+            Identifies the header as the API key location.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiSecurityLocationType.Cookie">
+            <summary>
+            Identifies the cookie as the API key location.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiSecuritySchemeType">
+            <summary>
+            This specifices the OpenAPI security scheme value.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiSecuritySchemeType.None">
+            <summary>
+            Identifies no scheme.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiSecuritySchemeType.Basic">
+            <summary>
+            Identifies the basic scheme.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiSecuritySchemeType.Bearer">
+            <summary>
+            Identifies the bearer scheme.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiVersionType">
+            <summary>
+            This specifies the version of OpenAPI.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiVersionType.V2">
+            <summary>
+            Identifies the OpenAPI version 2.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiVersionType.V3">
+            <summary>
+            Identifies the OpenAPI version 3.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiVisibilityType">
+            <summary>
+            This specifies the visibility of an attribute, which is used for Logic Apps and/or PowerApps.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiVisibilityType.Undefined">
+            <summary>
+            Identifies <c>undefined</c>.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiVisibilityType.Important">
+            <summary>
+            Identifies the field is <c>important</c>. This field is always shown.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiVisibilityType.Advanced">
+            <summary>
+            Identifies the field is <c>advanced</c>. This field is hidden under the additional menu.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiVisibilityType.Internal">
+            <summary>
+            Identifies the field is <c>internal</c>. This field is always hidden.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.EnumExtensions">
+            <summary>
+            This represents the extension entity for enums.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.EnumExtensions.ToDisplayName(System.Enum,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <summary>
+            Gets the display name of the enum value.
+            </summary>
+            <param name="enum">Enum value.</param>
+            <param name="namingStrategy"><see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> instance.</param>
+            <returns>Display name of the enum value.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.EnumExtensions.ToDataType(System.Type)">
+            <summary>
+            Converts the <see cref="T:System.TypeCode"/> value into data type specified in OpenAPI spec.
+            </summary>
+            <param name="type"><see cref="T:System.Type"/> value.</param>
+            <returns>Data type specified in OpenAPI spec.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.EnumExtensions.ToDataFormat(System.Type)">
+            <summary>
+            Converts the <see cref="T:System.TypeCode"/> value into data format specified in OpenAPI spec.
+            </summary>
+            <param name="type"><see cref="T:System.Type"/> value.</param>
+            <returns>Data format specified in OpenAPI spec.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.EnumExtensions.GetContentType(Microsoft.OpenApi.OpenApiFormat)">
+            <summary>
+            Gets the content type.
+            </summary>
+            <param name="format"><see cref="T:Microsoft.OpenApi.OpenApiFormat"/> value.</param>
+            <returns>The content type.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.EnumExtensions.ToOpenApiSpecVersion(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiVersionType)">
+            <summary>
+            Converts the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiVersionType"/> to <see cref="T:Microsoft.OpenApi.OpenApiSpecVersion"/>.
+            </summary>
+            <param name="version"><see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiVersionType"/> value.</param>
+            <returns>Returns <see cref="T:Microsoft.OpenApi.OpenApiSpecVersion"/> value.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.EnumExtensions.ToOpenApiFormat(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiFormatType)">
+            <summary>
+            Converts the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiFormatType"/> to <see cref="T:Microsoft.OpenApi.OpenApiFormat"/>.
+            </summary>
+            <param name="format"><see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums.OpenApiFormatType"/> value.</param>
+            <returns>Returns <see cref="T:Microsoft.OpenApi.OpenApiFormat"/> value.</returns>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.GenericExtensions">
+            <summary>
+            This represents the extension entity for generic.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.GenericExtensions.IsNullOrDefault``1(``0)">
+            <summary>
+            Checks whether the given instance is <c>null</c> or default.
+            </summary>
+            <typeparam name="T">Type of instance.</typeparam>
+            <param name="instance">Instance to check.</param>
+            <returns><c>true</c>, if the original instance is <c>null</c> or empty; otherwise returns <c>false</c>.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.GenericExtensions.ThrowIfNullOrDefault``1(``0)">
+            <summary>
+            Throws an <see cref="T:System.ArgumentNullException"/> if the given instance is <c>null</c> or default.
+            </summary>
+            <typeparam name="T">Type of instance.</typeparam>
+            <param name="instance">Instance to check.</param>
+            <returns>The original instance, if the instance is NOT <c>null</c>; otherwise throws an <see cref="T:System.ArgumentNullException"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="instance"/> is <see langword="null"/></exception>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.GenericExtensions.IsEmpty``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Checks whether the given list of items is empty.
+            </summary>
+            <typeparam name="T">Type of instance.</typeparam>
+            <param name="items">List of instances.</param>
+            <returns><c>true</c>, if the given list of items is empty; otherwise returns <c>false</c>.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.GenericExtensions.AddRange``2(System.Collections.Generic.Dictionary{``0,``1},System.Collections.Generic.Dictionary{``0,``1})">
+            <summary>
+            Adds range of collection to source.
+            </summary>
+            <typeparam name="TKey">Type of the key.</typeparam>
+            <typeparam name="TValue">Type of the value.</typeparam>
+            <param name="source"><see cref="T:System.Collections.Generic.Dictionary`2"/> instance to be added as a source.</param>
+            <param name="collection"><see cref="T:System.Collections.Generic.Dictionary`2"/> instance to add.</param>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.MemberInfoExtensions">
+            <summary>
+            This represents the extension entity for <see cref="T:System.Reflection.MemberInfo"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.MemberInfoExtensions.ExistsCustomAttribute``1(System.Reflection.MemberInfo,System.Boolean)">
+            <summary>
+            Checks whether the custom attribute exists or not.
+            </summary>
+            <typeparam name="T">Type of custom attribute.</typeparam>
+            <param name="element"><see cref="T:System.Reflection.MemberInfo"/> instance.</param>
+            <param name="inherit">Value indicating whether to inspect ancestors or not. Default is <c>false</c>.</param>
+            <returns><c>true</c>, if custom attribute exists; otherwise returns <c>false</c>.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.MemberInfoExtensions.ToDisplayName(System.Reflection.MemberInfo,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <summary>
+            Gets the display name of the enum value.
+            </summary>
+            <param name="element"><see cref="T:System.Reflection.MemberInfo"/> instance.</param>
+            <param name="namingStrategy"><see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> instance.</param>
+            <returns>Display name of the enum value.</returns>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.MethodInfoExtensions">
+            <summary>
+            This represents the extension entity for <see cref="T:System.Reflection.MethodInfo"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.MethodInfoExtensions.GetFunctionName(System.Reflection.MethodInfo)">
+            <summary>
+            Gets the <see cref="T:Microsoft.Azure.WebJobs.FunctionNameAttribute"/> instance.
+            </summary>
+            <param name="element"><see cref="T:System.Reflection.MethodInfo"/> instance.</param>
+            <returns><see cref="T:Microsoft.Azure.WebJobs.FunctionNameAttribute"/> instance.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.MethodInfoExtensions.GetHttpTrigger(System.Reflection.MethodInfo)">
+            <summary>
+            Gets the <see cref="T:Microsoft.Azure.WebJobs.HttpTriggerAttribute"/> instance.
+            </summary>
+            <param name="element"><see cref="T:System.Reflection.MethodInfo"/> instance.</param>
+            <returns><see cref="T:Microsoft.Azure.WebJobs.HttpTriggerAttribute"/> instance.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.MethodInfoExtensions.GetOpenApiOperation(System.Reflection.MethodInfo)">
+            <summary>
+            Gets the <see cref="T:Microsoft.Azure.WebJobs.HttpTriggerAttribute"/> instance.
+            </summary>
+            <param name="element"><see cref="T:System.Reflection.MethodInfo"/> instance.</param>
+            <returns><see cref="T:Microsoft.Azure.WebJobs.HttpTriggerAttribute"/> instance.</returns>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.OpenApiDocumentExtensions">
+            <summary>
+            This represents the extension entity for <see cref="T:Microsoft.OpenApi.Models.OpenApiDocument"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.OpenApiDocumentExtensions.Serialise(Microsoft.OpenApi.Models.OpenApiDocument,System.IO.TextWriter,Microsoft.OpenApi.OpenApiSpecVersion,Microsoft.OpenApi.OpenApiFormat)">
+            <summary>
+            Serialises the <see cref="T:Microsoft.OpenApi.Models.OpenApiDocument"/> based on the spec version and format.
+            </summary>
+            <param name="document"><see cref="T:Microsoft.OpenApi.Models.OpenApiDocument"/> instance.</param>
+            <param name="writer"><see cref="T:System.IO.TextWriter"/> instance.</param>
+            <param name="version"><see cref="T:Microsoft.OpenApi.OpenApiSpecVersion"/> value.</param>
+            <param name="format"><see cref="T:Microsoft.OpenApi.OpenApiFormat"/> value.</param>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.OpenApiInfoExtensions">
+            <summary>
+            This represents the extension entity for <see cref="T:Microsoft.OpenApi.Models.OpenApiInfo"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.OpenApiInfoExtensions.IsValid(Microsoft.OpenApi.Models.OpenApiInfo)">
+            <summary>
+            Checks whether the given <see cref="T:Microsoft.OpenApi.Models.OpenApiInfo"/> is valid or not.
+            </summary>
+            <param name="openApiInfo"><see cref="T:Microsoft.OpenApi.Models.OpenApiInfo"/> instance.</param>
+            <returns>Returns <c>True</c>, if the given <see cref="T:Microsoft.OpenApi.Models.OpenApiInfo"/> is valid; otherwise returns <c>False</c>.</returns>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.OpenApiParameterAttributeExtensions">
+            <summary>
+            This represents the extension entity for <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiParameterAttribute"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.OpenApiParameterAttributeExtensions.ToOpenApiParameter(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiParameterAttribute,Newtonsoft.Json.Serialization.NamingStrategy,Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <summary>
+            Converts <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiParameterAttribute"/> to <see cref="T:Microsoft.OpenApi.Models.OpenApiParameter"/>.
+            </summary>
+            <param name="attribute"><see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiParameterAttribute"/> instance.</param>
+            <param name="namingStrategy"><see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> instance.</param>
+            <param name="collection"><see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection"/> instance.</param>
+            <returns><see cref="T:Microsoft.OpenApi.Models.OpenApiParameter"/> instance.</returns>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.OpenApiParameterExtensions">
+            <summary>
+            This represents the extension entity for <see cref="T:Microsoft.OpenApi.Models.OpenApiParameter"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.OpenApiParameterExtensions.AddOpenApiParameter``1(System.Collections.Generic.List{Microsoft.OpenApi.Models.OpenApiParameter},System.String,System.String,System.Boolean,Microsoft.OpenApi.Models.ParameterLocation)">
+            <summary>
+            Adds <see cref="T:Microsoft.OpenApi.Models.OpenApiParameter"/> instance to the collection of parameters.
+            </summary>
+            <typeparam name="T">Type of parameter.</typeparam>
+            <param name="parameters">List of <see cref="T:Microsoft.OpenApi.Models.OpenApiParameter"/> instances.</param>
+            <param name="name">Parameter name.</param>
+            <param name="description">Parameter description.</param>
+            <param name="required">Value indicating whether this parameter is required or not. Default is <c>false</c>.</param>
+            <param name="in"><see cref="T:Microsoft.OpenApi.Models.ParameterLocation"/> value. Default is <see cref="F:Microsoft.OpenApi.Models.ParameterLocation.Query"/>.</param>
+            <returns>List of <see cref="T:Microsoft.OpenApi.Models.OpenApiParameter"/> instances.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.OpenApiParameterExtensions.AddOpenApiParameter(System.Collections.Generic.List{Microsoft.OpenApi.Models.OpenApiParameter},System.Type,System.String,System.String,System.Boolean,Microsoft.OpenApi.Models.ParameterLocation)">
+            <summary>
+            Adds <see cref="T:Microsoft.OpenApi.Models.OpenApiParameter"/> instance to the collection of parameters.
+            </summary>
+            <param name="type">Type of parameter.</param>
+            <param name="parameters">List of <see cref="T:Microsoft.OpenApi.Models.OpenApiParameter"/> instances.</param>
+            <param name="name">Parameter name.</param>
+            <param name="description">Parameter description.</param>
+            <param name="required">Value indicating whether this parameter is required or not. Default is <c>false</c>.</param>
+            <param name="in"><see cref="T:Microsoft.OpenApi.Models.ParameterLocation"/> value. Default is <see cref="F:Microsoft.OpenApi.Models.ParameterLocation.Query"/>.</param>
+            <returns>List of <see cref="T:Microsoft.OpenApi.Models.OpenApiParameter"/> instances.</returns>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.OpenApiPayloadAttributeExtensions">
+            <summary>
+            This represents the extension entity for <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiPayloadAttribute"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.OpenApiPayloadAttributeExtensions.ToOpenApiMediaType``1(``0,Newtonsoft.Json.Serialization.NamingStrategy,Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <summary>
+            Converts <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiPayloadAttribute"/> to <see cref="T:Microsoft.OpenApi.Models.OpenApiMediaType"/>.
+            </summary>
+            <typeparam name="T">Type of payload attribute inheriting <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiPayloadAttribute"/>.</typeparam>
+            <param name="attribute">OpenApi payload attribute.</param>
+            <param name="namingStrategy"><see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> instance to create the JSON schema from .NET Types.</param>
+            <param name="collection"><see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection"/> instance.</param>
+            <returns><see cref="T:Microsoft.OpenApi.Models.OpenApiMediaType"/> instance.</returns>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.OpenApiResponsesExtensions">
+            <summary>
+            This represents the extension entity for <see cref="T:Microsoft.OpenApi.Models.OpenApiResponses"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.OpenApiResponsesExtensions.ToOpenApiResponses(System.Collections.Generic.Dictionary{System.String,Microsoft.OpenApi.Models.OpenApiResponse})">
+            <summary>
+            Converts dictionary of <see cref="T:Microsoft.OpenApi.Models.OpenApiResponse"/> instances to <see cref="T:Microsoft.OpenApi.Models.OpenApiResponses"/>.
+            </summary>
+            <param name="collection">Dictionary of <see cref="T:Microsoft.OpenApi.Models.OpenApiResponse"/> instances.</param>
+            <returns><see cref="T:Microsoft.OpenApi.Models.OpenApiResponses"/> instance.</returns>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.OpenApiResponseWithBodyAttributeExtensions">
+            <summary>
+            This represents the extension entity for <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiResponseWithBodyAttribute"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.OpenApiResponseWithBodyAttributeExtensions.ToOpenApiResponse(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiResponseWithBodyAttribute,Newtonsoft.Json.Serialization.NamingStrategy,Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <summary>
+            Converts <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiResponseWithBodyAttribute"/> to <see cref="T:Microsoft.OpenApi.Models.OpenApiResponse"/>.
+            </summary>
+            <param name="attribute"><see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiResponseWithBodyAttribute"/> instance.</param>
+            <param name="namingStrategy"><see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> instance to create the JSON schema from .NET Types.</param>
+            <param name="collection"><see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection"/> instance.</param>
+            <returns><see cref="T:Microsoft.OpenApi.Models.OpenApiResponse"/> instance.</returns>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.OpenApiResponseWithoutBodyAttributeExtensions">
+            <summary>
+            This represents the extension entity for <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiResponseWithoutBodyAttribute"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.OpenApiResponseWithoutBodyAttributeExtensions.ToOpenApiResponse(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiResponseWithoutBodyAttribute,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <summary>
+            Converts <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiResponseWithoutBodyAttribute"/> to <see cref="T:Microsoft.OpenApi.Models.OpenApiResponse"/>.
+            </summary>
+            <param name="attribute"><see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiResponseWithoutBodyAttribute"/> instance.</param>
+            <param name="namingStrategy"><see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> instance to create the JSON schema from .NET Types.</param>
+            <returns><see cref="T:Microsoft.OpenApi.Models.OpenApiResponse"/> instance.</returns>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.OpenApiSchemaExtensions">
+            <summary>
+            This represents the extension entity for <see cref="T:Microsoft.OpenApi.Models.OpenApiSchema"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.OpenApiSchemaExtensions.ToOpenApiSchema(System.Type,Newtonsoft.Json.Serialization.NamingStrategy,Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiSchemaVisibilityAttribute)">
+            <summary>
+            Converts <see cref="T:System.Type"/> to <see cref="T:Microsoft.OpenApi.Models.OpenApiSchema"/>.
+            </summary>
+            <param name="type"><see cref="T:System.Type"/> instance.</param>
+            <param name="namingStrategy"><see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> instance to create the JSON schema from .NET Types.</param>
+            <param name="attribute"><see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiSchemaVisibilityAttribute"/> instance. Default is <c>null</c>.</param>
+            <returns><see cref="T:Microsoft.OpenApi.Models.OpenApiSchema"/> instance.</returns>
+            <remarks>
+            It runs recursively to build the entire object type. It only takes properties without <see cref="T:Newtonsoft.Json.JsonIgnoreAttribute"/>.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.OpenApiSchemaExtensions.ToOpenApiSchemas(System.Type,Newtonsoft.Json.Serialization.NamingStrategy,Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiSchemaVisibilityAttribute,System.Boolean,System.Int32)">
+            <summary>
+            Converts <see cref="T:System.Type"/> to <see cref="T:Microsoft.OpenApi.Models.OpenApiSchema"/>.
+            </summary>
+            <param name="type"><see cref="T:System.Type"/> instance.</param>
+            <param name="namingStrategy"><see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> instance to create the JSON schema from .NET Types.</param>
+            <param name="attribute"><see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes.OpenApiSchemaVisibilityAttribute"/> instance. Default is <c>null</c>.</param>
+            <param name="returnSingleSchema">Value indicating whether to return single schema or not.</param>
+            <param name="depth">Recurring depth.</param>
+            <returns>Returns <see cref="T:System.Collections.Generic.Dictionary`2"/> instance.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.OpenApiSchemaExtensions.IsOpenApiSchemaObject(Microsoft.OpenApi.Models.OpenApiSchema)">
+            <summary>
+            Checks whether the OpenAPI schema is the object type or not.
+            </summary>
+            <param name="schema"><see cref="T:Microsoft.OpenApi.Models.OpenApiSchema"/> instance.</param>
+            <returns>Returns <c>True</c>, if the OpenAPI schema is the object type; otherwise, returns <c>False</c>.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.OpenApiSchemaExtensions.IsOpenApiSchemaArray(Microsoft.OpenApi.Models.OpenApiSchema)">
+            <summary>
+            Checks whether the OpenAPI schema is the array type or not.
+            </summary>
+            <param name="schema"><see cref="T:Microsoft.OpenApi.Models.OpenApiSchema"/> instance.</param>
+            <returns>Returns <c>True</c>, if the OpenAPI schema is the array type; otherwise, returns <c>False</c>.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.OpenApiSchemaExtensions.IsOpenApiSchemaDictionary(Microsoft.OpenApi.Models.OpenApiSchema)">
+            <summary>
+            Checks whether the OpenAPI schema is the dictionary type or not.
+            </summary>
+            <param name="schema"><see cref="T:Microsoft.OpenApi.Models.OpenApiSchema"/> instance.</param>
+            <returns>Returns <c>True</c>, if the OpenAPI schema is the dictionary type; otherwise, returns <c>False</c>.</returns>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.ParameterInfoExtensions">
+            <summary>
+            This represents the extension entity for <see cref="T:System.Reflection.ParameterInfo"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.ParameterInfoExtensions.ExistsCustomAttribute``1(System.Reflection.ParameterInfo,System.Boolean)">
+            <summary>
+            Checks whether the custom attribute exists or not.
+            </summary>
+            <typeparam name="T">Type of custom attribute.</typeparam>
+            <param name="element"><see cref="T:System.Reflection.ParameterInfo"/> instance.</param>
+            <param name="inherit">Value indicating whether to inspect ancestors or not. Default is <c>False</c>.</param>
+            <returns><c>True</c>, if custom attribute exists; otherwise returns <c>False</c>.</returns>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.PropertyInfoExtensions">
+            <summary>
+            This represents the extension entity for <see cref="T:System.Reflection.PropertyInfo"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.PropertyInfoExtensions.HasJsonPropertyAttribute(System.Reflection.PropertyInfo)">
+            <summary>
+            Checks whether the given <see cref="T:System.Reflection.PropertyInfo"/> object has <see cref="T:Newtonsoft.Json.JsonPropertyAttribute"/> or not.
+            </summary>
+            <param name="element"><see cref="T:System.Reflection.PropertyInfo"/> instance.</param>
+            <returns>Returns <c>True</c>, if the given <see cref="T:System.Reflection.PropertyInfo"/> object has <see cref="T:Newtonsoft.Json.JsonPropertyAttribute"/>; otherwise, returns <c>False</c>.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.PropertyInfoExtensions.GetJsonPropertyName(System.Reflection.PropertyInfo,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <summary>
+            Gets the name from <see cref="T:Newtonsoft.Json.JsonPropertyAttribute"/> instance.
+            </summary>
+            <param name="element"><see cref="T:System.Reflection.PropertyInfo"/> instance.</param>
+            <param name="namingStrategy"><see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> instance.</param>
+            <returns>Returns the name from <see cref="T:Newtonsoft.Json.JsonPropertyAttribute"/> instance.</returns>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.StringExtensions">
+            <summary>
+            This represents the extension class for <see cref="T:System.String"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.StringExtensions.IsNullOrWhiteSpace(System.String)">
+            <summary>
+            Checks whether the string value is either <c>null</c> or white space.
+            </summary>
+            <param name="value"><see cref="T:System.String"/> value to check.</param>
+            <returns><c>true</c>, if the string value is either <c>null</c> or white space; otherwise returns <c>false</c>.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.StringExtensions.ThrowIfNullOrWhiteSpace(System.String)">
+            <summary>
+            Throws an <see cref="T:System.ArgumentNullException"/> if the given value is <c>null</c> or white space.
+            </summary>
+            <param name="value">Value to check.</param>
+            <returns>The original value, if the value is NOT <c>null</c>; otherwise throws an <see cref="T:System.ArgumentNullException"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="value"/> is <see langword="null"/></exception>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.SwaggerUIExtensions">
+            <summary>
+            This represents the extension entity for <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.SwaggerUI"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.SwaggerUIExtensions.RenderAsync(System.Threading.Tasks.Task{Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.ISwaggerUI},System.String,Microsoft.Azure.WebJobs.Extensions.Http.AuthorizationLevel,System.String)">
+            <summary>
+            Renders the OpenAPI UI in HTML.
+            </summary>
+            <param name="ui"><see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.ISwaggerUI"/> instance.</param>
+            <param name="endpoint">The endpoint of the Swagger document.</param>
+            <param name="authLevel">The authorisation level of the Swagger document.</param>
+            <param name="authKey">API key of the HTTP endpoint to render OpenAPI document.</param>
+            <returns>The OpenAPI UI in HTML.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.SwaggerUIExtensions.RenderOAuth2RedirectAsync(System.Threading.Tasks.Task{Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.ISwaggerUI},System.String,Microsoft.Azure.WebJobs.Extensions.Http.AuthorizationLevel,System.String)">
+            <summary>
+            Renders the OAuth2 Redirect page in HTML.
+            </summary>
+            <param name="ui"><see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.ISwaggerUI"/> instance.</param>
+            <param name="endpoint">The endpoint of the OAuth2 Redirect page.</param>
+            <param name="authLevel">The authorisation level of the Swagger document.</param>
+            <param name="authKey">API key of the HTTP endpoint to render OpenAPI document.</param>
+            <returns>The OAuth2 Redirect page in HTML.</returns>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.TypeExtensions">
+            <summary>
+             This represents the extension entity for <see cref="T:System.Type"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.TypeExtensions.IsSimpleType(System.Type)">
+            <summary>
+            Checks whether the given type is simple type or not.
+            </summary>
+            <param name="type"></param>
+            <returns>Returns <c>True</c>, if simple type; otherwise returns <c>False</c>.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.TypeExtensions.IsReferentialType(System.Type)">
+            <summary>
+            Checks whether the type can be referenced or not.
+            </summary>
+            <param name="type">Type to check.</param>
+            <returns>Returns <c>True</c>, if the type can be referenced; otherwise returns <c>False</c>.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.TypeExtensions.IsJObjectType(System.Type)">
+            <summary>
+            Checks whether the given type is Json.NET related <see cref="T:Newtonsoft.Json.Linq.JObject"/>, <see cref="T:Newtonsoft.Json.Linq.JToken"/> or not.
+            </summary>
+            <param name="type"><see cref="T:System.Type"/> instance.</param>
+            <returns>Returns <c>True</c>, if the type is identified as either <see cref="T:Newtonsoft.Json.Linq.JObject"/> or <see cref="T:Newtonsoft.Json.Linq.JToken"/>; otherwise returns <c>False</c>.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.TypeExtensions.IsUnflaggedEnumType(System.Type)">
+            <summary>
+            Checks whether the given type is enum without flags or not.
+            </summary>
+            <param name="type"><see cref="T:System.Type"/> instance.</param>
+            <returns>Returns <c>True</c>, if the type is identified as enum without flags; otherwise returns <c>False</c>.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.TypeExtensions.ToOpenApiStringCollection(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <summary>
+            Converts the given <see cref="T:System.Type"/> instance to the list of underlying enum name.
+            </summary>
+            <param name="type"><see cref="T:System.Type"/> instance.</param>
+            <param name="namingStrategy"><see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> instance.</param>
+            <returns>Returns the list of underlying enum name.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.TypeExtensions.ToOpenApiInt16Collection(System.Type)">
+            <summary>
+            Converts the given <see cref="T:System.Type"/> instance to the list of underlying enum values of <see cref="T:System.Int16"/>.
+            </summary>
+            <param name="type"><see cref="T:System.Type"/> instance.</param>
+            <returns>Returns the list of underlying enum values of <see cref="T:System.Int16"/>.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.TypeExtensions.ToOpenApiInt32Collection(System.Type)">
+            <summary>
+            Converts the given <see cref="T:System.Type"/> instance to the list of underlying enum values of <see cref="T:System.Int32"/>.
+            </summary>
+            <param name="type"><see cref="T:System.Type"/> instance.</param>
+            <returns>Returns the list of underlying enum values of <see cref="T:System.Int32"/>.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.TypeExtensions.ToOpenApiInt64Collection(System.Type)">
+            <summary>
+            Converts the given <see cref="T:System.Type"/> instance to the list of underlying enum values of <see cref="T:System.Int64"/>.
+            </summary>
+            <param name="type"><see cref="T:System.Type"/> instance.</param>
+            <returns>Returns the list of underlying enum values of <see cref="T:System.Int64"/>.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.TypeExtensions.ToOpenApiIntegerCollection(System.Type)">
+            <summary>
+            Converts the given <see cref="T:System.Type"/> instance to the list of underlying enum value.
+            </summary>
+            <param name="type"><see cref="T:System.Type"/> instance.</param>
+            <returns>Returns the list of underlying enum value.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.TypeExtensions.IsOpenApiArray(System.Type)">
+            <summary>
+            Checks whether the given type is array or not, from the OpenAPI perspective.
+            </summary>
+            <param name="type"><see cref="T:System.Type"/> instance.</param>
+            <returns>Returns <c>True</c>, if the type is identified as array; otherwise returns <c>False</c>.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.TypeExtensions.IsOpenApiDictionary(System.Type)">
+            <summary>
+            Checks whether the given type is array or not, from the OpenAPI perspective.
+            </summary>
+            <param name="type"><see cref="T:System.Type"/> instance.</param>
+            <returns>Returns <c>True</c>, if the type is identified as array; otherwise returns <c>False</c>.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.TypeExtensions.IsOpenApiNullable(System.Type)">
+            <summary>
+            Checks whether the given type is nullable or not.
+            </summary>
+            <param name="type">Type to check.</param>
+            <returns>Returns <c>True</c>, if the given type is nullable; otherwise returns <c>False</c>.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.TypeExtensions.IsOpenApiNullable(System.Type,System.Type@)">
+            <summary>
+            Checks whether the given type is nullable or not.
+            </summary>
+            <param name="type">Type to check.</param>
+            <param name="underlyingType">Underlying type to return</param>
+            <returns>Returns <c>True</c>, if the given type is nullable; otherwise returns <c>False</c>.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.TypeExtensions.HasJsonConverterAttribute``1(System.Type)">
+            <summary>
+            Checks whether the given enum type has <see cref="T:Newtonsoft.Json.JsonConverterAttribute"/> or not.
+            </summary>
+            <typeparam name="T">Type of <see cref="T:Newtonsoft.Json.JsonConverter"/>.</typeparam>
+            <param name="type">Enum type.</param>
+            <returns>Returns <c>True</c>, if the given enum type has <see cref="T:Newtonsoft.Json.JsonConverterAttribute"/>; otherwise, returns <c>False</c>.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.TypeExtensions.GetOpenApiReferenceId(System.Type,System.Boolean,System.Boolean,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <summary>
+            Gets the OpenAPI reference ID.
+            </summary>
+            <param name="type"><see cref="T:System.Type"/> instance.</param>
+            <param name="isDictionary">Value indicating whether the type is <see cref="T:System.Collections.Generic.Dictionary`2"/> or not.</param>
+            <param name="isList">Value indicating whether the type is <see cref="T:System.Collections.Generic.List`1"/> or not.</param>
+            <param name="namingStrategy"><see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> instance.</param>
+            <returns>Returns the OpenAPI reference ID.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.TypeExtensions.GetOpenApiRootReferenceId(System.Type)">
+            <summary>
+            Gets the OpenAPI root reference ID.
+            </summary>
+            <param name="type"><see cref="T:System.Type"/> instance.</param>
+            <returns>Returns the OpenAPI root reference ID.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.TypeExtensions.IsGenericTypeOf(System.Type,System.Type)">
+            <summary>
+            Checks whether the given type is generic type of
+            </summary>
+            <param name="t1"><see cref="T:System.Type"/> instance.</param>
+            <param name="t2"><see cref="T:System.Type"/> instance to compare.</param>
+            <returns>Returns <c>True</c>, if the given type is generic; otherwise returns <c>False</c>.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.TypeExtensions.GetUnderlyingType(System.Type)">
+            <summary>
+            Gets the underlying type of the given generic type.
+            </summary>
+            <param name="type">Type to check to get its underlying type.</param>
+            <returns>Returns the underlying type.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.TypeExtensions.GetOpenApiDescription(System.Type)">
+            <summary>
+            Gets the OpenAPI description from the given <see cref="T:System.Type"/>.
+            </summary>
+            <param name="type"><see cref="T:System.Type"/> instance.</param>
+            <returns>Returns the OpenAPI description from the given <see cref="T:System.Type"/>.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.TypeExtensions.GetOpenApiGenericRootName(System.Type)">
+            <summary>
+            Gets the root name of the given generic type.
+            </summary>
+            <param name="type"><see cref="T:System.Type"/> instance.</param>
+            <returns>Returns the root name of the given generic type.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.TypeExtensions.GetOpenApiTypeName(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <summary>
+            Gets the type name applied by <see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/>.
+            </summary>
+            <param name="type">Type to check.</param>
+            <param name="namingStrategy"><see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> instance.</param>
+            <returns>Returns the type name applied by <see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/>.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.TypeExtensions.GetOpenApiSubType(System.Type)">
+            <summary>
+            Gets the sub type of the given <see cref="T:System.Type"/>.
+            </summary>
+            <param name="type"><see cref="T:System.Type"/> instance.</param>
+            <returns>Returns the sub type of the given <see cref="T:System.Type"/>.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.TypeExtensions.GetOpenApiSubTypeName(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <summary>
+            Gets the name of the sub type of the given <see cref="T:System.Type"/>.
+            </summary>
+            <param name="type"><see cref="T:System.Type"/> instance.</param>
+            <param name="namingStrategy"><see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> instance.</param>
+            <returns>Returns the name of the sub type of the given <see cref="T:System.Type"/>.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.TypeExtensions.GetOpenApiSubTypeNames(System.Type)">
+            <summary>
+            Gets the list of names of the sub type of the given <see cref="T:System.Type"/>.
+            </summary>
+            <param name="type"><see cref="T:System.Type"/> instance.</param>
+            <returns>Returns the list of names of the sub type of the given <see cref="T:System.Type"/>.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.TypeExtensions.HasRecursiveProperty(System.Type)">
+            <summary>
+            Checks whether the given type has a recursive property or not.
+            </summary>
+            <param name="type">Type to check.</param>
+            <returns>Returns <c>True</c>, if the given type has a recursive property; otherwise returns <c>False</c>.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.TypeExtensions.HasInterface``1(System.Type)">
+            <summary>
+            Checks whether the given type implements the given interface type.
+            </summary>
+            <typeparam name="T">Type of interface.</typeparam>
+            <param name="type">Type to check.</param>
+            <returns>Returns <c>True</c>, if the given type implements the given interface type; otherwise returns <c>False</c>.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions.TypeExtensions.HasInterface(System.Type,System.String)">
+            <summary>
+            Checks whether the given type implements the given interface type.
+            </summary>
+            <param name="type">Type to check.</param>
+            <param name="interfaceName">Name of the interface.</param>
+            <returns>Returns <c>True</c>, if the given type implements the given interface; otherwise returns <c>False</c>.</returns>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.OpenApiWriterFactory">
+            <summary>
+            This represents the factory entity to create a write instance based on the OpenAPI document format.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.OpenApiWriterFactory.CreateInstance(Microsoft.OpenApi.OpenApiFormat,System.IO.TextWriter)">
+            <summary>
+            Creates a new instance of <see cref="T:Microsoft.OpenApi.Writers.IOpenApiWriter"/> based on the OpenAPI document format.
+            </summary>
+            <param name="format"><see cref="T:Microsoft.OpenApi.OpenApiFormat"/> value.</param>
+            <param name="writer"><see cref="T:System.IO.TextWriter"/> instance.</param>
+            <returns><see cref="T:Microsoft.OpenApi.Writers.IOpenApiWriter"/> instance.</returns>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Resolvers.HostJsonResolver">
+            <summary>
+            This represents the resolver entity for host.json.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Resolvers.HostJsonResolver.Resolve(Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            Gets the <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> instance from host.json
+            </summary>
+            <param name="config"><see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> instance from the environment variables - either local.settings.json or App Settings blade.</param>
+            <param name="basePath">Base path of the executing Azure Functions assembly.</param>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Resolvers.HostJsonResolver.GetHttpSettings(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Gets the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.HttpSettings"/> instance.
+            </summary>
+            <param name="host"><see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> instance from host.json.</param>
+            <returns>Returns <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.HttpSettings"/> instance.</returns>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Resolvers.OpenApiConfigurationResolver">
+            <summary>
+            This represents the resolver entity for <see cref="T:Microsoft.OpenApi.Models.OpenApiServer"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Resolvers.OpenApiConfigurationResolver.Resolve(System.Reflection.Assembly)">
+            <summary>
+            Gets the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IOpenApiConfigurationOptions"/> instance from the given assembly.
+            </summary>
+            <param name="assembly">The executing assembly instance.</param>
+            <returns>Returns the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IOpenApiConfigurationOptions"/> instance resolved.</returns>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Resolvers.OpenApiCustomUIResolver">
+            <summary>
+            This represents the resolver entity for <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IOpenApiCustomUIOptions"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Resolvers.OpenApiCustomUIResolver.Resolve(System.Reflection.Assembly)">
+            <summary>
+            Gets the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IOpenApiCustomUIOptions"/> instance from the given assembly.
+            </summary>
+            <param name="assembly">The executing assembly instance.</param>
+            <returns>Returns the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IOpenApiCustomUIOptions"/> instance resolved.</returns>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.SwaggerUI">
+            <summary>
+            This represents the entity to render UI for OpenAPI.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.SwaggerUI.AddMetadata(Microsoft.OpenApi.Models.OpenApiInfo)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.SwaggerUI.AddServer(Microsoft.AspNetCore.Http.HttpRequest,System.String,Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IOpenApiConfigurationOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.SwaggerUI.BuildAsync(System.Reflection.Assembly,Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IOpenApiCustomUIOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.SwaggerUI.BuildOAuth2RedirectAsync(System.Reflection.Assembly)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.SwaggerUI.RenderAsync(System.String,Microsoft.Azure.WebJobs.Extensions.Http.AuthorizationLevel,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.SwaggerUI.RenderOAuth2RedirectAsync(System.String,Microsoft.Azure.WebJobs.Extensions.Http.AuthorizationLevel,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.SwaggerUI.RenderOAuth2Redirect(System.String,Microsoft.Azure.WebJobs.Extensions.Http.AuthorizationLevel,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.BooleanTypeVisitor">
+            <summary>
+            This represents the type visitor for <see cref="T:System.Boolean"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.BooleanTypeVisitor.#ctor(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.BooleanTypeVisitor.IsVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.BooleanTypeVisitor.Visit(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IAcceptor,System.Collections.Generic.KeyValuePair{System.String,System.Type},Newtonsoft.Json.Serialization.NamingStrategy,System.Attribute[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.BooleanTypeVisitor.IsParameterVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.BooleanTypeVisitor.ParameterVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.BooleanTypeVisitor.IsPayloadVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.BooleanTypeVisitor.PayloadVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DateTimeObjectTypeVisitor">
+            <summary>
+            This represents the type visitor for <see cref="T:System.DateTime"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DateTimeObjectTypeVisitor.#ctor(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DateTimeObjectTypeVisitor.IsVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DateTimeObjectTypeVisitor.Visit(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IAcceptor,System.Collections.Generic.KeyValuePair{System.String,System.Type},Newtonsoft.Json.Serialization.NamingStrategy,System.Attribute[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DateTimeObjectTypeVisitor.IsParameterVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DateTimeObjectTypeVisitor.ParameterVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DateTimeObjectTypeVisitor.IsPayloadVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DateTimeObjectTypeVisitor.PayloadVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DateTimeOffsetObjectTypeVisitor">
+            <summary>
+            This represents the type visitor for <see cref="T:System.DateTimeOffset"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DateTimeOffsetObjectTypeVisitor.#ctor(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DateTimeOffsetObjectTypeVisitor.IsVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DateTimeOffsetObjectTypeVisitor.Visit(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IAcceptor,System.Collections.Generic.KeyValuePair{System.String,System.Type},Newtonsoft.Json.Serialization.NamingStrategy,System.Attribute[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DateTimeOffsetObjectTypeVisitor.IsParameterVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DateTimeOffsetObjectTypeVisitor.ParameterVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DateTimeOffsetObjectTypeVisitor.IsPayloadVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DateTimeOffsetObjectTypeVisitor.PayloadVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DateTimeTypeVisitor">
+            <summary>
+            This represents the type visitor for <see cref="T:System.DateTime"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DateTimeTypeVisitor.#ctor(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DateTimeTypeVisitor.IsVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DateTimeTypeVisitor.Visit(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IAcceptor,System.Collections.Generic.KeyValuePair{System.String,System.Type},Newtonsoft.Json.Serialization.NamingStrategy,System.Attribute[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DateTimeTypeVisitor.IsParameterVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DateTimeTypeVisitor.ParameterVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DateTimeTypeVisitor.IsPayloadVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DateTimeTypeVisitor.PayloadVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DecimalTypeVisitor">
+            <summary>
+            This represents the type visitor for <see cref="T:System.Decimal"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DecimalTypeVisitor.#ctor(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DecimalTypeVisitor.IsVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DecimalTypeVisitor.Visit(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IAcceptor,System.Collections.Generic.KeyValuePair{System.String,System.Type},Newtonsoft.Json.Serialization.NamingStrategy,System.Attribute[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DecimalTypeVisitor.IsParameterVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DecimalTypeVisitor.ParameterVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DecimalTypeVisitor.IsPayloadVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DecimalTypeVisitor.PayloadVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DictionaryObjectTypeVisitor">
+            <summary>
+            This represents the type visitor for <see cref="T:System.Collections.Generic.Dictionary`2"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DictionaryObjectTypeVisitor.#ctor(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DictionaryObjectTypeVisitor.IsVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DictionaryObjectTypeVisitor.Visit(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IAcceptor,System.Collections.Generic.KeyValuePair{System.String,System.Type},Newtonsoft.Json.Serialization.NamingStrategy,System.Attribute[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DictionaryObjectTypeVisitor.IsParameterVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DictionaryObjectTypeVisitor.IsPayloadVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DictionaryObjectTypeVisitor.PayloadVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DoubleTypeVisitor">
+            <summary>
+            This represents the type visitor for <see cref="T:System.Double"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DoubleTypeVisitor.#ctor(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DoubleTypeVisitor.IsVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DoubleTypeVisitor.Visit(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IAcceptor,System.Collections.Generic.KeyValuePair{System.String,System.Type},Newtonsoft.Json.Serialization.NamingStrategy,System.Attribute[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DoubleTypeVisitor.IsParameterVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DoubleTypeVisitor.ParameterVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DoubleTypeVisitor.IsPayloadVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.DoubleTypeVisitor.PayloadVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.GuidObjectTypeVisitor">
+            <summary>
+            This represents the type visitor for <see cref="T:System.Guid"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.GuidObjectTypeVisitor.#ctor(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.GuidObjectTypeVisitor.IsVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.GuidObjectTypeVisitor.Visit(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IAcceptor,System.Collections.Generic.KeyValuePair{System.String,System.Type},Newtonsoft.Json.Serialization.NamingStrategy,System.Attribute[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.GuidObjectTypeVisitor.IsParameterVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.GuidObjectTypeVisitor.ParameterVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.GuidObjectTypeVisitor.IsPayloadVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.GuidObjectTypeVisitor.PayloadVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int16EnumTypeVisitor">
+            <summary>
+            This represents the type visitor for <see cref="T:System.Int16"/> type enum.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int16EnumTypeVisitor.#ctor(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int16EnumTypeVisitor.IsVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int16EnumTypeVisitor.Visit(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IAcceptor,System.Collections.Generic.KeyValuePair{System.String,System.Type},Newtonsoft.Json.Serialization.NamingStrategy,System.Attribute[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int16EnumTypeVisitor.IsParameterVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int16EnumTypeVisitor.ParameterVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int16EnumTypeVisitor.IsPayloadVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int16EnumTypeVisitor.PayloadVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int16TypeVisitor">
+            <summary>
+            This represents the type visitor for <see cref="T:System.Int16"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int16TypeVisitor.#ctor(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int16TypeVisitor.IsVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int16TypeVisitor.Visit(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IAcceptor,System.Collections.Generic.KeyValuePair{System.String,System.Type},Newtonsoft.Json.Serialization.NamingStrategy,System.Attribute[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int16TypeVisitor.IsParameterVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int16TypeVisitor.ParameterVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int16TypeVisitor.IsPayloadVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int16TypeVisitor.PayloadVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int32EnumTypeVisitor">
+            <summary>
+            This represents the type visitor for <see cref="T:System.Int32"/> type enum.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int32EnumTypeVisitor.#ctor(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int32EnumTypeVisitor.IsVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int32EnumTypeVisitor.Visit(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IAcceptor,System.Collections.Generic.KeyValuePair{System.String,System.Type},Newtonsoft.Json.Serialization.NamingStrategy,System.Attribute[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int32EnumTypeVisitor.IsParameterVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int32EnumTypeVisitor.ParameterVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int32EnumTypeVisitor.IsPayloadVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int32EnumTypeVisitor.PayloadVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int32TypeVisitor">
+            <summary>
+            This represents the type visitor for <see cref="T:System.Int32"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int32TypeVisitor.#ctor(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int32TypeVisitor.IsVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int32TypeVisitor.Visit(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IAcceptor,System.Collections.Generic.KeyValuePair{System.String,System.Type},Newtonsoft.Json.Serialization.NamingStrategy,System.Attribute[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int32TypeVisitor.IsParameterVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int32TypeVisitor.ParameterVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int32TypeVisitor.IsPayloadVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int32TypeVisitor.PayloadVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int64EnumTypeVisitor">
+            <summary>
+            This represents the type visitor for <see cref="T:System.Int64"/> type enum.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int64EnumTypeVisitor.#ctor(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int64EnumTypeVisitor.IsVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int64EnumTypeVisitor.Visit(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IAcceptor,System.Collections.Generic.KeyValuePair{System.String,System.Type},Newtonsoft.Json.Serialization.NamingStrategy,System.Attribute[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int64EnumTypeVisitor.IsParameterVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int64EnumTypeVisitor.ParameterVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int64EnumTypeVisitor.IsPayloadVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int64EnumTypeVisitor.PayloadVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int64TypeVisitor">
+            <summary>
+            This represents the type visitor for <see cref="T:System.Int64"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int64TypeVisitor.#ctor(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int64TypeVisitor.IsVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int64TypeVisitor.Visit(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IAcceptor,System.Collections.Generic.KeyValuePair{System.String,System.Type},Newtonsoft.Json.Serialization.NamingStrategy,System.Attribute[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int64TypeVisitor.IsParameterVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int64TypeVisitor.ParameterVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int64TypeVisitor.IsPayloadVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.Int64TypeVisitor.PayloadVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.IOpenApiSchemaAcceptor">
+            <summary>
+            This provides interfaces to the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.OpenApiSchemaAcceptor"/> class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.IOpenApiSchemaAcceptor.RootSchemas">
+            <summary>
+            Gets the list of <see cref="T:Microsoft.OpenApi.Models.OpenApiSchema"/> instances as key/value pair representing the root schemas.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.IOpenApiSchemaAcceptor.Schemas">
+            <summary>
+            Gets the list of <see cref="T:Microsoft.OpenApi.Models.OpenApiSchema"/> instances as key/value pair.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.IOpenApiSchemaAcceptor.Types">
+            <summary>
+            Gets the list of <see cref="T:System.Type"/> objects.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.JObjectTypeVisitor">
+            <summary>
+            This represents the type visitor for <see cref="T:Newtonsoft.Json.Linq.JObject"/> or <see cref="T:Newtonsoft.Json.Linq.JToken"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.JObjectTypeVisitor.#ctor(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.JObjectTypeVisitor.IsVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.JObjectTypeVisitor.Visit(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IAcceptor,System.Collections.Generic.KeyValuePair{System.String,System.Type},Newtonsoft.Json.Serialization.NamingStrategy,System.Attribute[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.JObjectTypeVisitor.IsParameterVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.JObjectTypeVisitor.IsPayloadVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.JObjectTypeVisitor.PayloadVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.ListObjectTypeVisitor">
+            <summary>
+            This represents the type visitor for <see cref="T:System.Collections.Generic.List`1"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.ListObjectTypeVisitor.#ctor(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.ListObjectTypeVisitor.IsVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.ListObjectTypeVisitor.Visit(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IAcceptor,System.Collections.Generic.KeyValuePair{System.String,System.Type},Newtonsoft.Json.Serialization.NamingStrategy,System.Attribute[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.ListObjectTypeVisitor.IsParameterVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.ListObjectTypeVisitor.ParameterVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.ListObjectTypeVisitor.IsPayloadVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.ListObjectTypeVisitor.PayloadVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.NullableObjectTypeVisitor">
+            <summary>
+            This represents the type visitor for <see cref="T:System.Object"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.NullableObjectTypeVisitor.#ctor(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.NullableObjectTypeVisitor.IsVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.NullableObjectTypeVisitor.Visit(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IAcceptor,System.Collections.Generic.KeyValuePair{System.String,System.Type},Newtonsoft.Json.Serialization.NamingStrategy,System.Attribute[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.NullableObjectTypeVisitor.IsParameterVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.NullableObjectTypeVisitor.ParameterVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.NullableObjectTypeVisitor.IsPayloadVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.NullableObjectTypeVisitor.PayloadVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.ObjectTypeVisitor">
+            <summary>
+            This represents the type visitor for <see cref="T:System.Object"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.ObjectTypeVisitor.#ctor(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.ObjectTypeVisitor.IsVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.ObjectTypeVisitor.Visit(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IAcceptor,System.Collections.Generic.KeyValuePair{System.String,System.Type},Newtonsoft.Json.Serialization.NamingStrategy,System.Attribute[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.ObjectTypeVisitor.IsNavigatable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.ObjectTypeVisitor.IsPayloadVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.ObjectTypeVisitor.PayloadVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.OpenApiSchemaAcceptor">
+            <summary>
+            This represents the acceptor entity for <see cref="T:Microsoft.OpenApi.Models.OpenApiSchema"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.OpenApiSchemaAcceptor.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.OpenApiSchemaAcceptor"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.OpenApiSchemaAcceptor.#ctor(System.Collections.Generic.Dictionary{System.String,Microsoft.OpenApi.Models.OpenApiSchema},System.Collections.Generic.Dictionary{System.String,Microsoft.OpenApi.Models.OpenApiSchema},System.Collections.Generic.Dictionary{System.String,System.Type})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.OpenApiSchemaAcceptor"/> class.
+            </summary>
+            <param name="rootSchemas">List of <see cref="T:Microsoft.OpenApi.Models.OpenApiSchema"/> instances as key/value pair representing the root schemas.</param>
+            <param name="schemas">List of <see cref="T:Microsoft.OpenApi.Models.OpenApiSchema"/> instances as key/value pair.</param>
+            <param name="types">List of <see cref="T:System.Type"/> objects.</param>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.OpenApiSchemaAcceptor.RootSchemas">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.OpenApiSchemaAcceptor.Schemas">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.OpenApiSchemaAcceptor.Types">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.OpenApiSchemaAcceptor.Properties">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.OpenApiSchemaAcceptor.Accept(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.RecursiveObjectTypeVisitor">
+            <summary>
+            This represents the type visitor for <see cref="T:System.Object"/> that contains recursive properties.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.RecursiveObjectTypeVisitor.#ctor(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.RecursiveObjectTypeVisitor.IsVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.RecursiveObjectTypeVisitor.Visit(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IAcceptor,System.Collections.Generic.KeyValuePair{System.String,System.Type},Newtonsoft.Json.Serialization.NamingStrategy,System.Attribute[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.RecursiveObjectTypeVisitor.IsNavigatable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.RecursiveObjectTypeVisitor.IsPayloadVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.RecursiveObjectTypeVisitor.PayloadVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.SingleTypeVisitor">
+            <summary>
+            This represents the type visitor for <see cref="T:System.Single"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.SingleTypeVisitor.#ctor(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.SingleTypeVisitor.IsVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.SingleTypeVisitor.Visit(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IAcceptor,System.Collections.Generic.KeyValuePair{System.String,System.Type},Newtonsoft.Json.Serialization.NamingStrategy,System.Attribute[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.SingleTypeVisitor.IsParameterVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.SingleTypeVisitor.ParameterVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.SingleTypeVisitor.IsPayloadVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.SingleTypeVisitor.PayloadVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.StringEnumTypeVisitor">
+            <summary>
+            This represents the type visitor for <see cref="T:System.String"/> type enum.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.StringEnumTypeVisitor.#ctor(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.StringEnumTypeVisitor.IsVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.StringEnumTypeVisitor.Visit(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IAcceptor,System.Collections.Generic.KeyValuePair{System.String,System.Type},Newtonsoft.Json.Serialization.NamingStrategy,System.Attribute[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.StringEnumTypeVisitor.IsParameterVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.StringEnumTypeVisitor.ParameterVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.StringEnumTypeVisitor.IsPayloadVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.StringEnumTypeVisitor.PayloadVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.StringTypeVisitor">
+            <summary>
+            This represents the type visitor for <see cref="T:System.String"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.StringTypeVisitor.#ctor(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.StringTypeVisitor.IsVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.StringTypeVisitor.Visit(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IAcceptor,System.Collections.Generic.KeyValuePair{System.String,System.Type},Newtonsoft.Json.Serialization.NamingStrategy,System.Attribute[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.StringTypeVisitor.IsParameterVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.StringTypeVisitor.ParameterVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.StringTypeVisitor.IsPayloadVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.StringTypeVisitor.PayloadVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.TypeVisitor">
+            <summary>
+            This represents the visitor entity for type. This MUST be inherited.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.TypeVisitor.#ctor(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.TypeVisitor"/> class.
+            </summary>
+            <param name="visitorCollection"><see cref="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.TypeVisitor.VisitorCollection"/> instance.</param>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.TypeVisitor.Type">
+            <summary>
+            Gets the <see cref="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.TypeVisitor.Type"/> object.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.TypeVisitor.VisitorCollection">
+            <summary>
+            Gets the <see cref="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.TypeVisitor.VisitorCollection"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.TypeVisitor.IsVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.TypeVisitor.Visit(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IAcceptor,System.Collections.Generic.KeyValuePair{System.String,System.Type},Newtonsoft.Json.Serialization.NamingStrategy,System.Attribute[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.TypeVisitor.IsNavigatable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.TypeVisitor.IsParameterVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.TypeVisitor.ParameterVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.TypeVisitor.IsPayloadVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.TypeVisitor.PayloadVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.TypeVisitor.IsVisitable(System.Type,System.TypeCode)">
+            <summary>
+            Checks whether the type is visitable or not.
+            </summary>
+            <param name="type">Type to check.</param>
+            <param name="code"><see cref="T:System.TypeCode"/> value.</param>
+            <returns>Returns <c>True</c>, if the type is visitable; otherwise returns <c>False</c>.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.TypeVisitor.IsReferential(System.Type)">
+            <summary>
+            Checks whether the type can be referenced or not.
+            </summary>
+            <param name="type">Type to check.</param>
+            <returns>Returns <c>True</c>, if the type can be referenced; otherwise returns <c>False</c>.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.TypeVisitor.Visit(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IAcceptor,System.String,System.String,System.String,System.String,System.Attribute[])">
+            <summary>
+            Visits and processes the acceptor.
+            </summary>
+            <param name="acceptor"><see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IAcceptor"/> instance.</param>
+            <param name="name">Property name.</param>
+            <param name="title">Type name.</param>
+            <param name="dataType">Data type.</param>
+            <param name="dataFormat">Data format.</param>
+            <param name="attributes">List of attribute instances.</param>
+            <returns>Returns the name as the schema key.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.TypeVisitor.ParameterVisit(System.String,System.String)">
+            <summary>
+            Visits and processes the <see cref="T:Microsoft.OpenApi.Models.OpenApiSchema"/> for parameters.
+            </summary>
+            <param name="dataType">Data type.</param>
+            <param name="dataFormat">Data format.</param>
+            <returns>Returns <see cref="T:Microsoft.OpenApi.Models.OpenApiSchema"/> instance.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.TypeVisitor.PayloadVisit(System.String,System.String)">
+            <summary>
+            Visits and processes the <see cref="T:Microsoft.OpenApi.Models.OpenApiSchema"/> for payloads.
+            </summary>
+            <param name="dataType">Data type.</param>
+            <param name="dataFormat">Data format.</param>
+            <returns>Returns <see cref="T:Microsoft.OpenApi.Models.OpenApiSchema"/> instance.</returns>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.UInt16TypeVisitor">
+            <summary>
+            This represents the type visitor for <see cref="T:System.UInt16"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.UInt16TypeVisitor.#ctor(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.UInt16TypeVisitor.IsVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.UInt16TypeVisitor.Visit(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IAcceptor,System.Collections.Generic.KeyValuePair{System.String,System.Type},Newtonsoft.Json.Serialization.NamingStrategy,System.Attribute[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.UInt16TypeVisitor.IsParameterVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.UInt16TypeVisitor.ParameterVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.UInt16TypeVisitor.IsPayloadVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.UInt16TypeVisitor.PayloadVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.UInt32TypeVisitor">
+            <summary>
+            This represents the type visitor for <see cref="T:System.UInt32"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.UInt32TypeVisitor.#ctor(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.UInt32TypeVisitor.IsVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.UInt32TypeVisitor.Visit(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IAcceptor,System.Collections.Generic.KeyValuePair{System.String,System.Type},Newtonsoft.Json.Serialization.NamingStrategy,System.Attribute[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.UInt32TypeVisitor.IsParameterVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.UInt32TypeVisitor.ParameterVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.UInt32TypeVisitor.IsPayloadVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.UInt32TypeVisitor.PayloadVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.UInt64TypeVisitor">
+            <summary>
+            This represents the type visitor for <see cref="T:System.UInt64"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.UInt64TypeVisitor.#ctor(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.UInt64TypeVisitor.IsVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.UInt64TypeVisitor.Visit(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IAcceptor,System.Collections.Generic.KeyValuePair{System.String,System.Type},Newtonsoft.Json.Serialization.NamingStrategy,System.Attribute[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.UInt64TypeVisitor.IsParameterVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.UInt64TypeVisitor.ParameterVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.UInt64TypeVisitor.IsPayloadVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.UInt64TypeVisitor.PayloadVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.UriTypeVisitor">
+            <summary>
+            This represents the type visitor for <see cref="T:System.Uri"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.UriTypeVisitor.#ctor(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.UriTypeVisitor.IsVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.UriTypeVisitor.Visit(Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IAcceptor,System.Collections.Generic.KeyValuePair{System.String,System.Type},Newtonsoft.Json.Serialization.NamingStrategy,System.Attribute[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.UriTypeVisitor.IsParameterVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.UriTypeVisitor.ParameterVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.UriTypeVisitor.IsPayloadVisitable(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.UriTypeVisitor.PayloadVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection">
+            <summary>
+            This represents the collection entity for <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IVisitor"/> instances.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection.#ctor(System.Collections.Generic.List{Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IVisitor})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection"/> class.
+            </summary>
+            <param name="visitors">List of <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IVisitor"/> instances.</param>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection.Visitors">
+            <summary>
+            Gets the list of <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IVisitor"/> instances.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection.CreateInstance">
+            <summary>
+            Creates a new instance of the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection"/> class by scanning the current assembly for <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IVisitor"/>.
+            </summary>
+            <remarks>
+            There is an expectation that the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions.IVisitor"/> implementation has a constructor that takes a <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection"/> as the only parameter.
+            </remarks>
+            <returns>Returns the <see cref="T:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection"/> instance.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection.ParameterVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <summary>
+            Processes the parameter type.
+            </summary>
+            <param name="type">Type of the parameter.</param>
+            <param name="namingStrategy"><see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> instance.</param>
+            <returns>Returns <see cref="T:Microsoft.OpenApi.Models.OpenApiSchema"/> instance.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors.VisitorCollection.PayloadVisit(System.Type,Newtonsoft.Json.Serialization.NamingStrategy)">
+            <summary>
+            Processes the request/response payload type.
+            </summary>
+            <param name="type">Type of the payload.</param>
+            <param name="namingStrategy"><see cref="T:Newtonsoft.Json.Serialization.NamingStrategy"/> instance.</param>
+            <returns>Returns <see cref="T:Microsoft.OpenApi.Models.OpenApiSchema"/> instance.</returns>
+        </member>
+    </members>
+</doc>
